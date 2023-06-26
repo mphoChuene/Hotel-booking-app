@@ -8,7 +8,9 @@ const Navbar = () => {
 
   return (
     <header className={styles.navbar}>
-      <h2>Hotels</h2>
+      <h2>
+        <strong>Whiteman Lodge</strong>{" "}
+      </h2>
       <nav>
         <ul
           className={

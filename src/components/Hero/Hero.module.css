@@ -1,12 +1,12 @@
-.hero{
-  background: url('../../assets/img/sara-dubler-Koei_7yYtIo-unsplash.jpg')
-  no-repeat center/cover;
+.hero {
+  background: url("../../assets/img/sara-dubler-Koei_7yYtIo-unsplash.jpg")
+    no-repeat center/cover;
   display: flex;
   width: 100%;
-  height: 500px;
+  height: 600px;
 }
 
-form{
+form {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,41 +20,44 @@ form{
   border-radius: 25px;
 }
 
-form label{
-  font-size: .8rem;
+form label {
+  font-size: 0.8rem;
   padding-top: 2px;
 }
 
-.text, .from, .until {
+.text,
+.from,
+.until {
   display: flex;
   flex-direction: column;
 }
 
-.from, .until {
+.from,
+.until {
   border-left: 1px solid #333;
   padding-left: 6px;
 }
 
-form input{
+form input {
   background-color: transparent;
   border: none;
-  font-family: 'poppins',sans-serif;
+  font-family: "poppins", sans-serif;
 }
 
-form input:focus{
+form input:focus {
   outline: none;
 }
 
-form .text_input{
+form .text_input {
   width: 300px;
   font-size: 1rem;
 }
 
-.search_btn{
+.search_btn {
   display: flex;
   align-items: center;
 }
 
-.search_btn button{
+.search_btn button {
   display: none;
 }

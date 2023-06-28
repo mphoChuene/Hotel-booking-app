@@ -43,6 +43,8 @@
 }
 .text_1 {
   text-align: left;
+  position: absolute;
+  left: 65px1;
   vertical-align: top;
   font-size: 40px;
   font-family: Belleza;
@@ -61,7 +63,7 @@
   display: flex;
   flex-direction: row;
   position: relative;
-
+  left: 680px;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 80px;

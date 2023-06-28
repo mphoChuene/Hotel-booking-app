@@ -1,7 +1,6 @@
 .container {
-  width: 1916px;
-  height: 1662px;
-  flex-shrink: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .heading {
@@ -25,10 +24,12 @@
   flex-direction: row;
   justify-content: flex-end;
   flex-wrap: wrap;
+  position: relative;
+  right: 5%;
 }
 
 img {
-  width: 100%;
+  width: 50%;
   /* height: 250px; */
   border-radius: 25px;
 }
@@ -38,6 +39,8 @@ img {
   width: 30%;
   /* flex-direction: row; */
 }
-/* .box {
-  margin: 45px;
-} */
+
+.box{
+  scale: 0.95;
+}
+

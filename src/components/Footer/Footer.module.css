@@ -18,6 +18,7 @@
 .footer_1 {
   display: flex;
   flex-direction: column;
+  background-color: #fff5eb;
   justify-content: flex-start;
   align-items: flex-start;
   padding: 80px 0px;
@@ -32,6 +33,7 @@
 .companydetailssocialmedia {
   display: flex;
   flex-direction: column;
+  margin-left: 150px;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 16px;
@@ -39,7 +41,6 @@
 .logo {
   height: 40px;
   width: 80px;
-  background-color: #ffffff;
 }
 .text_1 {
   text-align: left;
@@ -170,6 +171,7 @@
 .text_1_2 {
   text-align: left;
   vertical-align: top;
+  margin-left: 150px;
   font-size: 13px;
   font-family: DM Sans;
   line-height: 125%;

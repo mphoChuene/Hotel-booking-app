@@ -15,19 +15,19 @@ const Footer = () => {
         </div>
         <div className={styles.frame_5_7}>
           <div className={styles.homelink}>
-            <p className={styles.text_3}>Habitaciones</p>
-            <p className={styles.text_4}>Servicios</p>
-            <p className={styles.text_5}>Eventos</p>
+            <p className={styles.text_3}>Bedrooms</p>
+            <p className={styles.text_4}>Services</p>
+            <p className={styles.text_5}>Events</p>
           </div>
           <div className={styles.homelink}>
-            <p className={styles.text_6}>Habitaciones</p>
-            <p className={styles.text_7}>Servicios</p>
-            <p className={styles.text_8}>Eventos</p>
+            <p className={styles.text_6}>Bedrooms</p>
+            <p className={styles.text_7}>Services</p>
+            <p className={styles.text_8}>Events</p>
           </div>
           <div className={styles.homelink}>
-            <p className={styles.text_9}>Habitaciones</p>
-            <p className={styles.text_1_0}>Servicios</p>
-            <p className={styles.text_1_1}>Eventos</p>
+            <p className={styles.text_9}>Bedrooms</p>
+            <p className={styles.text_1_0}>Services</p>
+            <p className={styles.text_1_1}>Events</p>
           </div>
         </div>
       </div>

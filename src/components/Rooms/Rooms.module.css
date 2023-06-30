@@ -1,5 +1,5 @@
 .container {
-  position: relative;
+  position: absolute;
   width: 100vw;
   height: 100vh;
 }
@@ -37,7 +37,9 @@ img {
 
 .slider_container {
   /* display: flex; */
-  width: 30%;
+  flex: 33.33%;
+  position: relative;
+  left: 80px;
   /* flex-direction: row; */
 }
 

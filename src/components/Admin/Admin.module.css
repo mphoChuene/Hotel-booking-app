@@ -1,0 +1,55 @@
+* {
+  font-family: "poppins";
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #fff;
+}
+
+.search_bar {
+  padding-top: 35px;
+  display: flex;
+  width: 100vw;
+  scale: 0.98;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+input {
+  width: 620px;
+  height: 63px;
+  background-color: #e4e3e3de;
+  border-radius: 25px;
+}
+
+.admin_icon {
+  font-size: 26px;
+}
+
+button {
+  width: 150px;
+  border: none;
+  color: #fff;
+  border-radius: 25px;
+}
+
+.options {
+  margin-top: 155px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bar {
+  background-color: #efeded;
+  width: 100%;
+  color: #727070;
+  height: 15vh;
+  text-align: center;
+}
+.bar h2 {
+  padding-top: 50px;
+  font-size: 3Spx;
+}
+

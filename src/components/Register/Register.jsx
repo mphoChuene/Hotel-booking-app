@@ -1,25 +1,25 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase-config.jsx";
+import { auth } from "../../firebase-config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import "../Login/Login.css";
 
-const [registerEmail, setRegisterEmail] = useState("");
-const [registerPassword, setRegisterPassword] = useState("");
-
-const registration = async () => {
-  try {
-    const user = await createUserWithEmailAndPassword(
-      auth,
-      registerEmail,
-      registerPassword
-    );
-    console.log(user);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
 const Register = () => {
+  const [registerEmail, setRegisterEmail] = useState("");
+  const [registerPassword, setRegisterPassword] = useState("");
+
+  const registration = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        registerEmail,
+        registerPassword
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <>
       <div className="login-page">

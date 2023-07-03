@@ -1,8 +1,8 @@
 * {
   font-family: "poppins";
-
 }
-.container, .unit_container {
+.container,
+.unit_container {
   width: 100vw;
   height: 100vh;
 
@@ -13,29 +13,25 @@
   padding-top: 35px;
   display: flex;
   width: 100vw;
-  scale: 0.98;
+
   flex-direction: row;
   justify-content: space-around;
 }
 
 input {
- 
   background-color: #e4e3e3de;
 }
 
-input[type=text]{
- padding: 8px;
- width: 320px;
- height: 53px;
- border: none;
- color: #727070;
- margin-top: 8px;
- font-size: 17px;
- border-radius: 25px;
-
-
+input[type="text"] {
+  padding: 8px;
+  width: 320px;
+  height: 53px;
+  border: none;
+  color: #727070;
+  margin-top: 8px;
+  font-size: 17px;
+  border-radius: 25px;
 }
-
 
 .admin_icon {
   font-size: 26px;
@@ -66,20 +62,20 @@ button {
   font-size: 3Spx;
 }
 
-.availability{
+.availability {
   width: 324px;
   height: 130px;
   text-align: center;
   border-radius: 15px;
   margin-left: 20px;
-  background-color: #EFEDED;
+  background-color: #efeded;
 }
 
-.icon_spacing{
-  padding-right:20px;
+.icon_spacing {
+  padding-right: 20px;
 }
 
-.unit{
+.unit {
   display: flex;
   padding-top: 20px;
   padding-left: 20px;
@@ -87,7 +83,7 @@ button {
   flex-direction: row;
 }
 
-.unit > img{
+.unit > img {
   width: 302px;
   height: 189px;
 }

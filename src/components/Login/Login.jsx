@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "./Login.css";
 
-const [loginEmail, setLoginEmail] = useState("");
-const [loginPassword, setLoginPassword] = useState("");
-
-const login = async () => {};
-
-const logout = async () => {};
-
 const Login = () => {
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const login = async () => {};
+
+  const logout = async () => {};
   return (
     <>
       <div className="login-page">

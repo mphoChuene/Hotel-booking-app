@@ -13,9 +13,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/*   <Navbar />
     <Hero />
-    <Category />
+     <Category />
     <Rooms />
     <Footer /> */}
-    <Admin />
+    {/*  <Admin /> */}
+    <Login />
+    <Register />
   </React.StrictMode>
 );

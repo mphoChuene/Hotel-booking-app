@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
+
+const [loginEmail, setLoginEmail] = useState("");
+const [loginPassword, setLoginPassword] = useState("");
+
+const login = async () => {};
+
+const logout = async () => {};
 
 const Login = () => {
   return (
@@ -7,18 +14,21 @@ const Login = () => {
       <div className="login-page">
         <div className="form">
           <h3>Login</h3>
-          <form className="register-form">
-            <input type="text" placeholder="name" />
-            <input type="password" placeholder="password" />
-            <input type="text" placeholder="email address" />
-            <button>create</button>
-            <p className="message">
-              Already registered? <a href="#">Sign In</a>
-            </p>
-          </form>
           <form className="login-form">
-            <input type="text" placeholder="username" />
-            <input type="password" placeholder="password" />
+            <input
+              type="email"
+              placeholder="email"
+              onChange={(event) => {
+                setLoginEmail(event.target.value);
+              }}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              onChange={(event) => {
+                setLoginPassword(event.target.value);
+              }}
+            />
             <button>login</button>
             <p className="message">
               Not registered? <a href="#">Create an account</a>

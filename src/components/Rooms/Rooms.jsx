@@ -24,7 +24,7 @@ const Rooms = () => {
               <h4>Twin room</h4>
               <h5>R500 p/n</h5>
 
-              <button>Reserve</button>
+              <button className={styles.reserve}>Reserve</button>
             </div>
           </div>
 
@@ -34,7 +34,7 @@ const Rooms = () => {
               <h4>Basic-master</h4>
               <h5>R1000 p/n</h5>
 
-              <button>Reserve</button>
+              <button className={styles.reserve}>Reserve</button>
             </div>
           </div>
           <div className={styles.slider_container}>
@@ -42,7 +42,7 @@ const Rooms = () => {
               <img src={blueroom} />
               <h4>Luxury-master</h4>
               <h5>R1250 p/n</h5>
-              <button>Reserve</button>
+              <button className={styles.reserve}>Reserve</button>
             </div>
           </div>
 
@@ -51,7 +51,7 @@ const Rooms = () => {
               <img src={deluxroom} />
               <h4>Royalty-suit</h4>
               <h5>R2500 p/n</h5>
-              <button>Reserve</button>
+              <button className={styles.reserve}>Reserve</button>
             </div>
           </div>
           <div className={styles.slider_container}>
@@ -59,7 +59,7 @@ const Rooms = () => {
               <img src={comfort} />
               <h4>Delux-comfort</h4>
               <h5>R2800 p/n</h5>
-              <button>Reserve</button>
+              <button className={styles.reserve}>Reserve</button>
             </div>
           </div>
 
@@ -68,7 +68,7 @@ const Rooms = () => {
               <img src={superdelux} />
               <h4>Master-suit</h4>
               <h5>R3000 p/n</h5>
-              <button>Reserve</button>
+              <button className={styles.reserve}>Reserve</button>
             </div>
           </div>
         </div>

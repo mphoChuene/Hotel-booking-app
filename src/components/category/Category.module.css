@@ -39,11 +39,3 @@ img {
   font-size: large;
 }
 
-button {
-  width: 294px;
-  height: 50px;
-  margin-bottom: 25px;
-  background-color: #fce2c8;
-  border-radius: 25px;
-  flex-shrink: 0;
-}

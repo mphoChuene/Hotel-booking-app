@@ -4,7 +4,7 @@ import styles from "./Hero.module.css";
 const Hero = () => {
   return (
     <div className={styles.hero}>
-      <form>
+      <form className={styles.form}>
         <div className={styles.text}>
           <label>Where</label>
           <input

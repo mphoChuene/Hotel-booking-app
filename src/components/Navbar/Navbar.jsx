@@ -2,9 +2,11 @@ import { React, useState } from "react";
 import styles from "./Navbar.module.css";
 
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { auth } from "../../firebase-config";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+ 
 
   return (
     <header className={styles.navbar}>

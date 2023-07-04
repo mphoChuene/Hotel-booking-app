@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase-config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import "../Login/Login.css";
 
 const Register = () => {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [user, setUser] = useState({});
 
   const registration = async (e) => {
     e.preventDefault();

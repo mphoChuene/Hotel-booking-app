@@ -11,11 +11,11 @@ import Register from "./components/Register/Register.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/*   <Navbar />
+    {/* <Navbar />
     <Hero />
-     <Category />
-    <Rooms />
-    <Footer /> */}
+    <Category />
+    <Rooms /> */}
+    {/* <Footer /> */}
     {/*  <Admin /> */}
     {/* <Login /> */}
     <Register />

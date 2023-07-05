@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Auth } from "firebase/auth";
+// import { unstable_HistoryRouter, Link } from "react-router-dom";
+import { auth } from "../../firebase-config";
 import "./Login.css";
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const login = async () => {};
-
-  const logout = async () => {};
+  const history = useHstory();
+  const homePage = () => {
+    history.push("./home");
+  };
   return (
     <>
       <div className="login-page">
@@ -29,7 +31,7 @@ const Login = () => {
                 setLoginPassword(event.target.value);
               }}
             />
-            <button>login</button>
+            <button onClick={homePage}>login</button>
             <p className="message">
               Not registered? <a href="#">Create an account</a>
             </p>

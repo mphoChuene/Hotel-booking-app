@@ -33,10 +33,7 @@ const Footer = () => {
       </div>
       <div className={styles.frame_5_5}>
         <p className={styles.text_1_2}>© Logo Hotel 2023. copyright reserved</p>
-        <div className={styles.frame_6_7}>
-          <p className={styles.text_1_3}>ours socials :</p>
-          <div className={styles.frame_5_3}></div>
-        </div>
+        
       </div>
     </div>
   );

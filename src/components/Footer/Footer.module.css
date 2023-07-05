@@ -1,5 +1,5 @@
 .container {
-  
+  background-color: red;
   display: flex;
   width: 100vw;
   height: 100px;
@@ -17,16 +17,14 @@
   gap: 72px;
 }
 .footer_1 {
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  width: 100%;
-  height: 100vh;
-  padding: 180px 0px;
-  gap: 72px;
+  /* display: flex; */
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 250px;
+  padding-top: 50px;
+  padding-right: 80px;
+  background-color: #fff5eb;
 }
 .frame_5_6 {
   display: flex;
@@ -43,17 +41,16 @@
   gap: 16px;
 }
 .logo {
-  height: 40px;
-  width: 80px;
+  /* height: 40px; */
+  /* width: 80px; */
 }
 .text_1 {
   text-align: left;
 
-  left: 65px1;
-  vertical-align: top;
+  /* vertical-align: top; */
   font-size: 40px;
   font-family: Belleza;
-  line-height: 100%;
+  /* line-height: 100%; */
   color: #000000;
 }
 .text_2 {
@@ -180,13 +177,7 @@
   line-height: 125%;
   color: #4c4c4c;
 }
-.frame_6_7 {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 16px;
-}
+
 .text_1_3 {
   text-align: left;
   vertical-align: top;

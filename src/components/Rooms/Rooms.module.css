@@ -1,7 +1,9 @@
 .container {
-  position: absolute;
+  /* position: absolute; */
   width: 100vw;
   height: 100vh;
+  scale: 0.98;
+  padding: 0 40px;
 }
 
 .reserve {
@@ -51,6 +53,3 @@ img {
   left: 80px;
   /* flex-direction: row; */
 }
-
-
-

@@ -3,8 +3,6 @@ import Hero from "./components/Hero/Hero.jsx";
 import Rooms from "./components/Rooms/Rooms.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import Admin from "./components/Admin/Admin.jsx";
-import Login from "./components/Login/Login.jsx";
 import Category from "./components/category/Category.jsx";
 
 const HotelPage = () => {

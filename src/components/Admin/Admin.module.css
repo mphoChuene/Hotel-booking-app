@@ -13,7 +13,7 @@
   padding-top: 35px;
   display: flex;
   width: 100vw;
-
+  background-color: #fff;
   flex-direction: row;
   justify-content: space-around;
 }
@@ -38,9 +38,12 @@ input[type="text"] {
 }
 
 button {
-  width: 150px;
+  width: 300px;
+  height: 55px;
   border: none;
   color: #fff;
+  margin-bottom: 15px;
+  background-color: #ffd6ae;
   border-radius: 25px;
 }
 

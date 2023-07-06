@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
+  const navigate = useNavigate();
   const [loginPassword, setLoginPassword] = useState("");
 
   // const history = useHistory();
@@ -18,11 +19,11 @@ const Login = () => {
     try {
       const user = await signInWithEmailAndPassword(
         auth,
-        registerEmail,
-        registerPassword
+        loginEmail,
+        loginPassword
       );
-      // history.push("./home");
-      alert("successfullly logged in");
+
+      navigate("/hotel");
       console.log(user);
     } catch (error) {
       console.log(error.message);
@@ -49,7 +50,7 @@ const Login = () => {
                 setLoginPassword(event.target.value);
               }}
             />
-            <button>login</button>
+            <button onClick={Signin}>login</button>
             <p className="message">
               Not registered? <a href="#">Create an account</a>
             </p>

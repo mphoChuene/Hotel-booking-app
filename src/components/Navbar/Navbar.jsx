@@ -1,12 +1,11 @@
 import { React, useState } from "react";
 import styles from "./Navbar.module.css";
-
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { auth } from "../../firebase-config";
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
- 
 
   return (
     <header className={styles.navbar}>
@@ -20,13 +19,15 @@ const Navbar = () => {
           }
         >
           <li>
-            <a href="/#">Home</a>
+            <a href="#">Home</a>
           </li>
           <li>
-            <a href="/#">Login</a>
+            <a href="#">Available rooms</a>
           </li>
           <li>
-            <a href="/#">Register</a>
+            <Link to={"/"}>
+              <a>Logout</a>
+            </Link>
           </li>
         </ul>
       </nav>

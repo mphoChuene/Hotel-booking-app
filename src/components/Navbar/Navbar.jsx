@@ -22,7 +22,7 @@ const Navbar = () => {
             <a href="#">Home</a>
           </li>
           <li>
-            <a href="#">Available rooms</a>
+            <a href="#">user: {auth.currentUser.email}</a>
           </li>
           <li>
             <Link to={"/"}>

@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import styles from "./Navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineMenu, AiOutlineClose, AiOutlineUser } from "react-icons/ai";
 import { auth } from "../../firebase-config";
 
 const Navbar = () => {
@@ -22,7 +22,9 @@ const Navbar = () => {
             <a href="#">Home</a>
           </li>
           <li>
-            <a href="#">user: {auth.currentUser.email}</a>
+            <a href="#">
+              <AiOutlineUser /> : {auth.currentUser.email}
+            </a>
           </li>
           <li>
             <Link to={"/"}>
@@ -38,4 +40,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar; 

@@ -50,9 +50,12 @@ const Login = () => {
                 setLoginPassword(event.target.value);
               }}
             />
-            <button onClick={Signin}>login</button>
+            <button onClick={Signin}>Login</button>
             <p className="message">
-              Not registered? <a href="#">Create an account</a>
+              Not registered? <a href="/register">Create an account</a>
+            </p>
+            <p className="message">
+              forgot password? <a href="/forgotpassword">reset you password</a>
             </p>
           </form>
         </div>

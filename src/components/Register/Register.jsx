@@ -22,7 +22,7 @@ const Register = () => {
         registerPassword
       );
       console.log(user);
-      navigate("/login");
+      navigate("/");
     } catch (error) {
       console.log(error.message);
     }

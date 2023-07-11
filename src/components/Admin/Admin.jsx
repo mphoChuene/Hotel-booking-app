@@ -1,4 +1,7 @@
 import React from "react";
+import { db } from "../../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
+import { async } from "@firebase/util";
 import styles from "./Admin.module.css";
 import {
   basic,
@@ -19,6 +22,11 @@ const iconSize = {
 };
 
 const Admin = () => {
+
+const add = (async)=>{
+
+}
+
   return (
     <div className={styles.container}>
       <div className={styles.search_bar}>

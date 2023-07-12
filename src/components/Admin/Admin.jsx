@@ -1,6 +1,7 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { db } from "../../firebase-config";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
 import styles from "./Admin.module.css";
 import {
@@ -22,10 +23,15 @@ const iconSize = {
 };
 
 const Admin = () => {
-
-const add = (async)=>{
-
-}
+  const [unit, setUnit] = useState([]);
+  const unitCollectionRef = collection(db, "unit");
+  useEffect(() => {
+    const getUnit = async () => {
+      const data = await getDocs(unitCollectionRef);
+      console.log(data);
+    };
+    getUnit();
+  }, []);
 
   return (
     <div className={styles.container}>

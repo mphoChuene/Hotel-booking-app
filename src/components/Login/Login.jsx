@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./Login.css";
@@ -8,11 +8,6 @@ const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const navigate = useNavigate();
   const [loginPassword, setLoginPassword] = useState("");
-
-  // const history = useHistory();
-  // const homePage = () => {
-  //   history.push("./home");
-  // };
 
   const Signin = async (e) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase-config";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc } from "firebase/firestore";
 import { async } from "@firebase/util";
 import styles from "./Admin.module.css";
 import {
@@ -23,12 +23,12 @@ const iconSize = {
 };
 
 const Admin = () => {
-  const [unit, setUnit] = useState([]);
-  const unitCollectionRef = collection(db, "unit");
+  const [units, setUnits] = useState([]);
+  const unitCollectionRef = collection(db, "bookings");
   useEffect(() => {
     const getUnit = async () => {
       const data = await getDocs(unitCollectionRef);
-      console.log(data);
+      setUnits(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUnit();
   }, []);
@@ -60,7 +60,7 @@ const Admin = () => {
       <div className={styles.unit_container}>
         {/* //unit 1 */}
         <div className={styles.unit}>
-          <img src={basic} alt="basic unit" />
+          <img src={deluxroom} alt="basic unit" />
           <div className={styles.availability}>
             <p>Mr Chuene</p> <br />
             <p className={styles.sub_text}>
@@ -71,46 +71,34 @@ const Admin = () => {
             </p>
           </div>
         </div>
+
         {/* //unit 2 */}
-        <div className={styles.unit}>
-          <img src={comfort} alt="comfort uint" />
-          <div className={styles.availability}>
-            <p>Mr Chuene</p> <br />
-            <p className={styles.sub_text}>
-              <span className={styles.icon_spacing}>
-                <i class="fa-solid fa-user"></i>X 2{" "}
-              </span>
-              <i class="fa-solid fa-moon"></i> 02 June-03 June
-            </p>
-          </div>
-        </div>
-        {/* //unit 3 */}
-        <div className={styles.unit}>
-          <img src={blueroom} alt="blueroom" />
-          <div className={styles.availability}>
-            <p>Mr Chuene</p> <br />
-            <p className={styles.sub_text}>
-              <span className={styles.icon_spacing}>
-                <i class="fa-solid fa-user"></i>X 2{" "}
-              </span>
-              <i class="fa-solid fa-moon"></i> 02 June-03 June
-            </p>
-          </div>
-        </div>
-        {/* //unit 4 */}
-        <div className={styles.unit}>
-          <img src={royal} alt="royal unit" />
-          <div className={styles.availability}>
-            <p>Mr Chuene</p> <br />
-            <p className={styles.sub_text}>
-              <span className={styles.icon_spacing}>
-                <i class="fa-solid fa-user"></i>X 2{" "}
-              </span>
-              <i class="fa-solid fa-moon"></i> 02 June-03 June
-            </p>
-          </div>
-        </div>
+        {units.map((unit) => {
+          return (
+            <div className={styles.unit}>
+              <img src={unit.Img} alt="royal unit" />
+              <div className={styles.availability}>
+                <p>{unit.Guest}</p> <br />
+                <p className={styles.sub_text}>
+                  <span className={styles.icon_spacing}>
+                    <i class="fa-solid fa-user"></i>X 2{" "}
+                  </span>
+                  <i class="fa-solid fa-moon"></i>
+                  {unit.Date}
+                </p>
+              </div>
+            </div>
+          );
+        })}
       </div>
+
+      {units.map((unit) => {
+        return (
+          <div>
+            <p>{unit.Guest}</p>
+          </div>
+        );
+      })}
     </div>
   );
 };

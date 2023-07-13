@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase-config";
 import { collection, addDoc, getDocs, doc } from "firebase/firestore";
 import { async } from "@firebase/util";
@@ -23,6 +24,11 @@ const iconSize = {
 };
 
 const Admin = () => {
+  const navigate = useNavigate();
+
+  const addRoom = () => {
+    navigate("/addunit");
+  };
   const [units, setUnits] = useState([]);
   const unitCollectionRef = collection(db, "bookings");
   useEffect(() => {
@@ -48,7 +54,7 @@ const Admin = () => {
           All rooms
         </button>
 
-        <button>
+        <button onClick={addRoom}>
           <i className="fa-solid fa-circle-plus" style={{ ...iconSize }} />
           Create new booking
         </button>

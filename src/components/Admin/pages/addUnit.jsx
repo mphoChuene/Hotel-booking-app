@@ -1,16 +1,34 @@
-import "./addUnit.css";
-import { useState, React } from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../../../firebase-config";
 import { useNavigate } from "react-router-dom";
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import "./addUnit.css";
 
 const AddUnit = () => {
   const navigate = useNavigate();
-  const [guest, setGuest] = useState("");
-  const [photo, setPhoto] = useState("");
-  const [Date, setDate] = useState(0);
-  const createUnit = async () => {
-    alert("function works!");
+  const [units, setUnits] = useState([]);
+  const unitCollectionRef = collection(db, "bookings");
+  const [newGuest, setNewGuest] = useState("");
+  const [newImg, setNewImg] = useState("");
+  const [newDate, setNewDate] = useState("");
+
+  const createUnit = async (e) => {
+    e.preventDefault();
+    await addDoc(unitCollectionRef, {
+      Guest: newGuest,
+      Img: newImg,
+      Date: newDate,
+    });
     navigate("/admin");
   };
+
+  useEffect(() => {
+    const getUnit = async () => {
+      const data = await getDocs(unitCollectionRef);
+      setUnits(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getUnit();
+  }, []);
 
   return (
     <div className="main-container">
@@ -20,24 +38,27 @@ const AddUnit = () => {
         <form>
           <input
             type="date"
+            value={newDate}
             onChange={(event) => {
-              setDate(event.target.value);
+              setNewDate(event.target.value);
             }}
           />
           <input
             type="text"
             placeholder="guest name..."
             className="form-input"
+            value={newGuest}
             onChange={(event) => {
-              setGuest(event.target.value);
+              setNewGuest(event.target.value);
             }}
           />
           <input
             type="text"
             placeholder="photoUrls..."
             className="form-input"
+            value={newImg}
             onChange={(event) => {
-              setPhoto(event.target.value);
+              setNewImg(event.target.value);
             }}
           />
 

@@ -30,9 +30,7 @@ const Admin = () => {
     navigate("/addunit");
   };
   const [units, setUnits] = useState([]);
-  const createBooking = async()=>{
-
-  }
+  const createBooking = async () => {};
   const unitCollectionRef = collection(db, "bookings");
   useEffect(() => {
     const getUnit = async () => {
@@ -100,14 +98,6 @@ const Admin = () => {
           );
         })}
       </div>
-
-      {units.map((unit) => {
-        return (
-          <div>
-            <p>{unit.Guest}</p>
-          </div>
-        );
-      })}
     </div>
   );
 };

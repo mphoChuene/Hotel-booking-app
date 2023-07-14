@@ -5,6 +5,7 @@ import Rooms from "./components/Rooms/Rooms";
 import Admin from "./components/Admin/Admin";
 import ForgotPassword from "./components/ForgotPassword";
 import Register from "./components/Register/Register";
+import AddUnit from "./components/Admin/pages/addUnit";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
           <Route path="/hotel" element={<HotelPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/rooms" element={<Rooms />} />
+          <Route path="/addunit" element={<AddUnit />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Routes>
       </Router>

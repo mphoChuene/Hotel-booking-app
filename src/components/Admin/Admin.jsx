@@ -24,6 +24,9 @@ const iconSize = {
 
 const Admin = () => {
   const [units, setUnits] = useState([]);
+  const createBooking = async()=>{
+
+  }
   const unitCollectionRef = collection(db, "bookings");
   useEffect(() => {
     const getUnit = async () => {
@@ -48,7 +51,7 @@ const Admin = () => {
           All rooms
         </button>
 
-        <button>
+        <button onClick={createBooking}>
           <i className="fa-solid fa-circle-plus" style={{ ...iconSize }} />
           Create new booking
         </button>

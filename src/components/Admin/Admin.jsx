@@ -26,6 +26,10 @@ const iconSize = {
 const Admin = () => {
   const navigate = useNavigate();
 
+  const updateUnit = async (id, Guest, Date, Img) => {
+      const newFields={}
+  };
+
   const addRoom = () => {
     navigate("/addunit");
   };
@@ -93,6 +97,10 @@ const Admin = () => {
                   <i class="fa-solid fa-moon"></i>
                   {unit.Date}
                 </p>
+                <button className={styles.btn} onClick={updateUnit(user.id,user.Guest,user.Date,user.Img)}>
+                  Update
+                </button>
+                <button className={styles.btn}>Delete</button>
               </div>
             </div>
           );

@@ -2,7 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase-config";
-import { collection, addDoc, getDocs, doc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  onSnapshot,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { async } from "@firebase/util";
 import styles from "./Admin.module.css";
 import {
@@ -26,22 +34,38 @@ const iconSize = {
 const Admin = () => {
   const navigate = useNavigate();
 
-  const updateUnit = async (id, Guest, Date, Img) => {
-      const newFields={}
+  const updateUnit = async (id, guest, date, img) => {
+    const newFields = {
+      Guest: guest, // Update guest field
+      Date: date, // Update date field
+      Img: img, // Update img field
+    };
+
+    await updateDoc(doc(db, "bookings", id), newFields);
+  };
+
+  const deleteUnit = async (id) => {
+    await deleteDoc(doc(db, "bookings", id));
   };
 
   const addRoom = () => {
     navigate("/addunit");
   };
+
   const [units, setUnits] = useState([]);
-  const createBooking = async () => {};
+
   const unitCollectionRef = collection(db, "bookings");
+
   useEffect(() => {
-    const getUnit = async () => {
-      const data = await getDocs(unitCollectionRef);
-      setUnits(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getUnit();
+    const unsubscribe = onSnapshot(unitCollectionRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setUnits(data);
+    });
+
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -66,10 +90,10 @@ const Admin = () => {
       </div>
 
       <div className={styles.bar}>
-        <h2>Hotel Suits</h2>
+        <h2>Hotel Suites</h2>
       </div>
       <div className={styles.unit_container}>
-        {/* //unit 1 */}
+        {/* unit 1 */}
         <div className={styles.unit}>
           <img src={deluxroom} alt="basic unit" />
           <div className={styles.availability}>
@@ -83,10 +107,10 @@ const Admin = () => {
           </div>
         </div>
 
-        {/* //unit 2 */}
+        {/* unit 2 */}
         {units.map((unit) => {
           return (
-            <div className={styles.unit}>
+            <div className={styles.unit} key={unit.id}>
               <img src={unit.Img} alt="royal unit" />
               <div className={styles.availability}>
                 <p>{unit.Guest}</p> <br />
@@ -97,10 +121,20 @@ const Admin = () => {
                   <i class="fa-solid fa-moon"></i>
                   {unit.Date}
                 </p>
-                <button className={styles.btn} onClick={updateUnit(user.id,user.Guest,user.Date,user.Img)}>
+                <button
+                  className={styles.btn}
+                  onClick={() =>
+                    updateUnit(unit.id, unit.Guest, unit.Date, unit.Img)
+                  }
+                >
                   Update
                 </button>
-                <button className={styles.btn}>Delete</button>
+                <button
+                  className={styles.btn}
+                  onClick={() => deleteUnit(unit.id)}
+                >
+                  Delete
+                </button>
               </div>
             </div>
           );

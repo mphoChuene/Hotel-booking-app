@@ -34,14 +34,8 @@ const iconSize = {
 const Admin = () => {
   const navigate = useNavigate();
 
-  const updateUnit = async (id, guest, date, img) => {
-    const newFields = {
-      Guest: guest, // Update guest field
-      Date: date, // Update date field
-      Img: img, // Update img field
-    };
-
-    await updateDoc(doc(db, "bookings", id), newFields);
+  const updateUnit = () => {
+    navigate("/updateunit");
   };
 
   const deleteUnit = async (id) => {
@@ -121,12 +115,7 @@ const Admin = () => {
                   <i class="fa-solid fa-moon"></i>
                   {unit.Date}
                 </p>
-                <button
-                  className={styles.btn}
-                  onClick={() =>
-                    updateUnit(unit.id, unit.Guest, unit.Date, unit.Img)
-                  }
-                >
+                <button className={styles.btn} onClick={updateUnit}>
                   Update
                 </button>
                 <button

@@ -34,8 +34,8 @@ const iconSize = {
 const Admin = () => {
   const navigate = useNavigate();
 
-  const updateUnit = () => {
-    navigate("/updateunit");
+  const updateUnit = (id) => {
+    navigate(`/updateunit/${id}`);
   };
 
   const deleteUnit = async (id) => {
@@ -115,7 +115,7 @@ const Admin = () => {
                   <i class="fa-solid fa-moon"></i>
                   {unit.Date}
                 </p>
-                <button className={styles.btn} onClick={updateUnit}>
+                <button className={styles.btn}  onClick={() => updateUnit(unit.id)}>
                   Update
                 </button>
                 <button

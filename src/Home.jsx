@@ -19,7 +19,7 @@ const Home = () => {
           <Route path="/hotel" element={<HotelPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/rooms" element={<Rooms />} />
-          <Route path="/updateunit" element={<UpdatePage />} />
+          <Route path="/updateunit/:id" element={<UpdatePage />} />
           <Route path="/addunit" element={<AddUnit />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
         </Routes>

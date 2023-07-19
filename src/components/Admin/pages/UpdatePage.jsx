@@ -1,13 +1,14 @@
 import React from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./addUnit.css";
 
 const UpdatePage = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const updateUnit = async (id, guest, date, img) => {
+  const updateUnit = async (guest, date, img) => {
     const newFields = {
       Guest: guest,
       Date: date,
@@ -21,10 +22,10 @@ const UpdatePage = () => {
   const [newGuest, setNewGuest] = React.useState("");
   const [newImg, setNewImg] = React.useState("");
 
-  const handleUpdateUnit = (event) => {
+  const handleUpdateUnit = async (event) => {
     event.preventDefault();
-    updateUnit(unit.id, newGuest, newDate, newImg);
-    navigate("/admin");
+    await updateUnit(newGuest, newDate, newImg);
+    navigate(`/admin`);
   };
 
   return (

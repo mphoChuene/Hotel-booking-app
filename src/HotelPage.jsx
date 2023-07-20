@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import Hero from "./components/Hero/Hero.jsx";
 import Rooms from "./components/Rooms/Rooms.jsx";
 import Footer from "./components/Footer/Footer.jsx";

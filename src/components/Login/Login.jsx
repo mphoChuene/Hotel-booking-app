@@ -17,9 +17,11 @@ const Login = () => {
         loginEmail,
         loginPassword
       );
-
-      navigate("/hotel");
-      console.log(user);
+      if (user.user.email === "admin@gmail.com") {
+        navigate("/admin");
+      } else {
+        navigate("/hotel");
+      }
     } catch (error) {
       console.log(error.message);
     }

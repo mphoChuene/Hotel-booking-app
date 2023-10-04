@@ -10,7 +10,8 @@ const Footer = () => {
             <p className={styles.text_1}>Whiteman Lodge</p>
           </div>
           <p className={styles.text_2}>
-            Arrive as a guest and leave as a friend
+            Arrive as a guest and leave as a friend, Call now +27 5684 2386 to
+            arrange a viewing
           </p>
         </div>
         <div className={styles.frame_5_7}>
@@ -33,7 +34,6 @@ const Footer = () => {
       </div>
       <div className={styles.frame_5_5}>
         <p className={styles.text_1_2}>© Logo Hotel 2023. copyright reserved</p>
-        
       </div>
     </div>
   );

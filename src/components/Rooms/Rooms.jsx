@@ -38,7 +38,7 @@ const Rooms = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Available rooms</h1>
+      <h1 className={styles.heading}>Booked rooms</h1>
 
       <div className={styles.room_container}>
         <div className={styles.room_subcontainer}>
@@ -59,12 +59,6 @@ const Rooms = () => {
                     <i className="fa-solid fa-moon"></i>
                     {unit.Date}
                   </p>
-                  <button className={styles.btn} onClick={() => updateUnit(unit.id)}>
-                    Update
-                  </button>
-                  <button className={styles.btn} onClick={() => deleteUnit(unit.id)}>
-                    Delete
-                  </button>
                 </div>
               </div>
             );

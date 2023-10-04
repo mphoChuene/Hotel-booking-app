@@ -53,3 +53,7 @@ img {
   left: 80px;
   /* flex-direction: row; */
 }
+.unit{
+  margin-left: 20px;
+  scale: .95;
+}

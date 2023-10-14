@@ -10,7 +10,7 @@ const Hero = () => {
           <input
             className={styles.text_input}
             type="text"
-            placeholder="Search location"
+            placeholder="Search room"
           />
         </div>
         <div className={styles.from}>

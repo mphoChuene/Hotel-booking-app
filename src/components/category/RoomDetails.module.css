@@ -1,0 +1,96 @@
+/* RoomDetails.module.css */
+
+.roomDetailsContainer {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .roomDetailsContainer img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+  }
+  
+  .roomDetailsContainer h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .roomDetailsContainer p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .roomDetailsContainer h2 {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  .roomDetailsContainer button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 20px 10px;
+    cursor: pointer;
+  }
+  
+  .roomDetailsContainer button:hover {
+    background-color: #0056b3;
+  }
+  
+  .paymentContainer {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .paymentContainer h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .paymentContainer p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .paymentContainer button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px 10px;
+    cursor: pointer;
+  }
+  
+  .paymentContainer button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Back to Room List link style */
+  .roomDetailsContainer a {
+    display: block;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .roomDetailsContainer a:hover {
+    text-decoration: underline;
+  }
+  

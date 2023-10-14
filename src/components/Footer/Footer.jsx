@@ -11,11 +11,11 @@ const Footer = () => {
           </div>
           <p className={styles.text_2}>
             Arrive as a guest and leave as a friend, Call now +27 5684 2386 to
-            arrange a viewing
+            arrange a viewing and booking.
           </p>
         </div>
         <div className={styles.frame_5_7}>
-          <div className={styles.homelink}>
+          {/* <div className={styles.homelink}>
             <p className={styles.text_3}>Bedrooms</p>
             <p className={styles.text_4}>Services</p>
             <p className={styles.text_5}>Events</p>
@@ -29,7 +29,7 @@ const Footer = () => {
             <p className={styles.text_9}>Bedrooms</p>
             <p className={styles.text_1_0}>Services</p>
             <p className={styles.text_1_1}>Events</p>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={styles.frame_5_5}>

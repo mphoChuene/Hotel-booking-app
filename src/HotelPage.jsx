@@ -8,11 +8,11 @@ import Category from "./components/category/Category.jsx";
 const HotelPage = () => {
   return (
     <>
-      <Navbar />
-      <Hero />
+      {/* <Navbar /> */}
+      {/* <Hero /> */}
       <Category />
-      <Rooms />
-      <Footer />
+      {/* <Rooms /> */}
+      {/* <Footer /> */}
     </>
   );
 };

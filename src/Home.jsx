@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./components/Login/Login";
 import HotelPage from "./HotelPage";
 import Rooms from "./components/Rooms/Rooms";
+import RoomDetails from "./components/category/RoomDetails";
 import Admin from "./components/Admin/Admin";
 import ForgotPassword from "./components/ForgotPassword";
 import Register from "./components/Register/Register";
@@ -19,6 +20,8 @@ const Home = () => {
           <Route path="/hotel" element={<HotelPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/rooms" element={<Rooms />} />
+          <Route path="/room-details/:roomName" element={<RoomDetails />} />
+          //recently added for navigating between room details
           <Route path="/updateunit/:id" element={<UpdatePage />} />
           <Route path="/addunit" element={<AddUnit />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />

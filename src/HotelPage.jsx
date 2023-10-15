@@ -11,7 +11,7 @@ const HotelPage = () => {
       {/* <Navbar /> */}
       {/* <Hero /> */}
       <Category />
-      {/* <Rooms /> */}
+      <Rooms />
       {/* <Footer /> */}
     </>
   );

@@ -8,20 +8,44 @@ const RoomDetails = () => {
   //   Replace this data with your actual room details data
   const roomDetails = {
     "Basic room": {
-      description: "2 bathrooms",
+      description: (
+        <span>
+          2 bathrooms <br />
+          1 master bedroom <br />
+          Gym <br />
+          24hrs security <br />
+          Free Parking
+        </span>
+      ),
       price: "R500 / night",
       image:
         "https://firebasestorage.googleapis.com/v0/b/hotelbooking-app-9d4ab.appspot.com/o/goldroom.jpg?alt=media&token=c3456634-171d-44e9-abe9-df4ddc4dd989&_gl=1*4vmemv*_ga*MzMzNTIzNjEyLjE2OTcyNTU5Mjk.*_ga_CW55HF8NVT*MTY5NzI1NTkyOC4xLjEuMTY5NzI1NjkzMC42MC4wLjA.", // Replace with the actual image URL
     },
     "Luxury room": {
-      description: "2 bathrooms",
-      price: "R500 / night",
+      description: (
+        <span>
+          2 bathrooms <br />
+          1 master bedroom <br />
+          Gym <br />
+          24hrs security <br />
+          Free Parking
+        </span>
+      ),
+      price: "R1200 / night",
       image:
         "https://firebasestorage.googleapis.com/v0/b/hotelbooking-app-9d4ab.appspot.com/o/goldroom.jpg?alt=media&token=c3456634-171d-44e9-abe9-df4ddc4dd989&_gl=1*4vmemv*_ga*MzMzNTIzNjEyLjE2OTcyNTU5Mjk.*_ga_CW55HF8NVT*MTY5NzI1NTkyOC4xLjEuMTY5NzI1NjkzMC42MC4wLjA.", // Replace with the actual image URL
     },
     "Royalty room": {
-      description: "2 bathrooms",
-      price: "R500 / night",
+      description: (
+        <span>
+          2 bathrooms <br />
+          1 master bedroom <br />
+          Gym <br />
+          24hrs security <br />
+          Free Parking
+        </span>
+      ),
+      price: "R2000 / night",
       image:
         "https://firebasestorage.googleapis.com/v0/b/hotelbooking-app-9d4ab.appspot.com/o/goldroom.jpg?alt=media&token=c3456634-171d-44e9-abe9-df4ddc4dd989&_gl=1*4vmemv*_ga*MzMzNTIzNjEyLjE2OTcyNTU5Mjk.*_ga_CW55HF8NVT*MTY5NzI1NTkyOC4xLjEuMTY5NzI1NjkzMC42MC4wLjA.", // Replace with the actual image URL
     },

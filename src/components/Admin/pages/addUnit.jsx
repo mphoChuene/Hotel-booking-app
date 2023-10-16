@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { db, storage } from "../../../firebase-config"; // Import storage from Firebase
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc, getDocs } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Import storage functions
-import "./addUnit.css";
+import { db } from "../../../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
+import "./AddUnit.css";
 
 const AddUnit = () => {
   const navigate = useNavigate();
-  const [units, setUnits] = useState([]);
   const unitCollectionRef = collection(db, "bookings");
-  const [newDate, setNewDate] = useState("");
 
+  const [newDate, setNewDate] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [specifications, setSpecifications] = useState({
     bedrooms: "",
@@ -26,17 +24,13 @@ const AddUnit = () => {
     // Upload the image to a storage service and get the image URL
     const imageURL = await uploadImage(imageFile);
 
+    // Create a new unit with specifications and add it to Firestore
     await addDoc(unitCollectionRef, {
       Img: imageURL,
       Date: newDate,
-      Specifications: {
-        Bedrooms: specifications.bedrooms,
-        Bathrooms: specifications.bathrooms,
-        Gym: specifications.hasGym,
-        FreeParking: specifications.hasFreeParking,
-        Security: specifications.has24HrSecurity,
-      },
+      Specifications: specifications, // Include the specifications
     });
+
     navigate("/admin");
   };
 
@@ -45,29 +39,9 @@ const AddUnit = () => {
     setImageFile(file);
   };
 
-  // Function to upload image and get URL
-  const uploadImage = async (file) => {
-    if (file) {
-      const storageRef = ref(storage, "roomImages/" + file.name);
-      await uploadBytes(storageRef, file);
-      const downloadURL = await getDownloadURL(storageRef);
-      return downloadURL;
-    }
-    return "";
-  };
-
-  useEffect(() => {
-    const getUnit = async () => {
-      const data = await getDocs(unitCollectionRef);
-      setUnits(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getUnit();
-  }, []);
-
   return (
     <div className="main-container">
       <h2 className="heading">Add unit</h2>
-
       <div className="sub-container">
         <form>
           <input

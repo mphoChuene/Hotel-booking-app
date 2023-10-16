@@ -23,8 +23,6 @@ import {
   superdelux,
 } from "../imports";
 
-//styling variables
-
 const iconSize = {
   fontSize: "25px",
   color: "#ffffff",
@@ -72,13 +70,13 @@ const Admin = () => {
         </h2>
       </div>
       <div className={styles.options}>
-        <button>
+        <button style={{ marginRight: 10 }}>
           <i class="fa-solid fa-bed" style={{ ...iconSize }}></i>
           All rooms
         </button>
 
         <button onClick={addRoom}>
-          <i className="fa-solid fa-circle-plus" style={{ ...iconSize }} />
+          <i class="fa-solid fa-circle-plus" style={{ ...iconSize }} />
           Create new booking
         </button>
       </div>
@@ -87,35 +85,52 @@ const Admin = () => {
         <h2>Hotel Suites</h2>
       </div>
       <div className={styles.unit_container}>
-        {/* unit 1 */}
-        <div className={styles.unit}>
-          <img src={deluxroom} alt="basic unit" />
-          <div className={styles.availability}>
-            <p>Mr Chuene</p> <br />
-            <p className={styles.sub_text}>
-              <span className={styles.icon_spacing}>
-                <i class="fa-solid fa-user"></i>X 2{" "}
-              </span>
-              <i class="fa-solid fa-moon"></i> 02 June-03 June
-            </p>
-          </div>
-        </div>
-
-        {/* unit 2 */}
+        {/* Map through the units and render them */}
         {units.map((unit) => {
           return (
             <div className={styles.unit} key={unit.id}>
-              <img src={unit.Img} alt="royal unit" />
+              <img src={unit.Img} alt="room unit" />
               <div className={styles.availability}>
-                <p>{unit.Guest}</p> <br />
-                <p className={styles.sub_text}>
-                  <span className={styles.icon_spacing}>
-                    <i class="fa-solid fa-user"></i>X 2{" "}
+                <span className={styles.sub_text}>
+                  <i class="fa-solid fa-moon"></i> {unit.Date}
+                </span>
+                {/* Render specifications here */}
+                <p className={styles.specifications}>
+                  <span>
+                    <i class="fa-solid fa-bed"></i>{" "}
+                    {unit.Specifications.bedrooms} Bedrooms
                   </span>
-                  <i class="fa-solid fa-moon"></i>
-                  {unit.Date}
+                  <br />
+                  <span>
+                    <i class="fa-solid fa-bath"></i>{" "}
+                    {unit.Specifications.bathrooms} Bathrooms
+                  </span>
+                  <br />
+                  <span>
+                    {unit.Specifications.hasGym && (
+                      <i class="fa-solid fa-dumbbell"></i>
+                    )}{" "}
+                    Gym Available
+                  </span>
+                  <br />
+                  <span>
+                    {unit.Specifications.hasFreeParking && (
+                      <i class="fa-solid fa-car"></i>
+                    )}{" "}
+                    Free Parking
+                  </span>
+                  <br />
+                  <span>
+                    {unit.Specifications.has24HrSecurity && (
+                      <i class="fa-solid fa-shield-check"></i>
+                    )}
+                    24-Hr Security
+                  </span>
                 </p>
-                <button className={styles.btn}  onClick={() => updateUnit(unit.id)}>
+                <button
+                  className={styles.btn}
+                  onClick={() => updateUnit(unit.id)}
+                >
                   Update
                 </button>
                 <button

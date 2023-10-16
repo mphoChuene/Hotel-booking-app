@@ -51,9 +51,9 @@ button {
   border: none;
   color:#fff;
   border-radius: 15px;
-  width: 100px;
-  margin-left: 18px;
-  margin-top: 35px;
+  width: 110px;
+  margin-left: 5px;
+  margin-top: 3px;
 }
 
 .options {
@@ -66,21 +66,24 @@ button {
   background-color: #efeded;
   width: 100%;
   color: #727070;
-  height: 15vh;
+  height: 20vh;
   text-align: center;
+  justify-content: center;
+  
 }
 .bar h2 {
-  padding-top: 50px;
+  padding-top: 30px;
   font-size: 3Spx;
+  justify-self: center;
 }
 
 .availability {
   width: 324px;
-  height: 130px;
+  height: 5%;
   text-align: center;
   border-radius: 15px;
   margin-left: 20px;
-  background-color: #efeded;
+  /* background-color: #efeded; */
 }
 
 .icon_spacing {

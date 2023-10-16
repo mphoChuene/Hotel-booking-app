@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Route,  BrowserRouter as Router } from "react-router-dom"; // Import the necessary components from react-router-dom
+import { Link, Route, BrowserRouter as Router } from "react-router-dom"; // Import the necessary components from react-router-dom
 import styles from "./Category.module.css";
 import RoomDetails from "./RoomDetails"; // Create a new component for room details
 
@@ -27,7 +27,7 @@ const rooms = [
       "https://firebasestorage.googleapis.com/v0/b/hotelbooking-app-9d4ab.appspot.com/o/deluxroom.jpg?alt=media&token=09b4eab5-39ed-45a2-acae-0c667e7a3622&_gl=1*16l8s24*_ga*MzMzNTIzNjEyLjE2OTcyNTU5Mjk.*_ga_CW55HF8NVT*MTY5NzI1NTkyOC4xLjEuMTY5NzI1NTk3Ny4xMS4wLjA.", // Replace with the actual image URL
   },
 ];
-const Category = () => {
+const Category = ({units}) => {
   return (
     <div className={styles.container}>
       <div className={styles.heading}>
@@ -48,10 +48,7 @@ const Category = () => {
           </div>
         ))}
       </div>
-{/* 
-      <Switch>
-        <Route path="/room-details/:roomName" component={RoomDetails} />
-      </Switch> */}
+      
     </div>
   );
 };

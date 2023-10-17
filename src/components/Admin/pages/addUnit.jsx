@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase-config";
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage"; // Import getStorage
 import { collection, addDoc } from "firebase/firestore";
 import "./AddUnit.css";
 
@@ -8,6 +9,7 @@ const AddUnit = () => {
   const navigate = useNavigate();
   const unitCollectionRef = collection(db, "bookings");
 
+  const [name, setName] = useState("");
   const [newDate, setNewDate] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [specifications, setSpecifications] = useState({
@@ -17,6 +19,26 @@ const AddUnit = () => {
     hasFreeParking: false,
     has24HrSecurity: false,
   });
+  const [price, setPrice] = useState(""); // Added state for price
+
+  // Define the uploadImage function
+  const uploadImage = async (imageFile) => {
+    const storage = getStorage(); // Initialize Firebase Storage
+    const storageRef = ref(storage, `images/${imageFile.name}`);
+
+    try {
+      // Upload the image to Firebase Storage
+      await uploadBytes(storageRef, imageFile);
+
+      // Get the download URL for the uploaded image
+      const downloadURL = await getDownloadURL(storageRef);
+
+      return downloadURL; // Return the image URL
+    } catch (error) {
+      console.error("Error uploading image: ", error);
+      throw error; // Handle or rethrow the error
+    }
+  };
 
   const createUnit = async (e) => {
     e.preventDefault();
@@ -26,9 +48,11 @@ const AddUnit = () => {
 
     // Create a new unit with specifications and add it to Firestore
     await addDoc(unitCollectionRef, {
+      name: name,
       Img: imageURL,
       Date: newDate,
-      Specifications: specifications, // Include the specifications
+      Specifications: specifications,
+      price: price, // Include the price
     });
 
     navigate("/admin");
@@ -44,6 +68,14 @@ const AddUnit = () => {
       <h2 className="heading">Add unit</h2>
       <div className="sub-container">
         <form>
+          <input
+            type="text"
+            placeholder="Unit Name"
+            value={name}
+            onChange={(event) => {
+              setName(event.target.value);
+            }}
+          />
           <input
             type="date"
             value={newDate}
@@ -135,6 +167,14 @@ const AddUnit = () => {
               />
             </label>
           </div>
+          <input
+            type="text"
+            placeholder="Price" // Input for price
+            value={price}
+            onChange={(event) => {
+              setPrice(event.target.value);
+            }}
+          />
           <button onClick={createUnit}>Add unit</button>
         </form>
       </div>

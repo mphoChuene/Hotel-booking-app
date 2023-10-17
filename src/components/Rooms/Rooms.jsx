@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import {
+  faBed,
+  faMoneyBill,
+  faBuilding,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./Rooms.module.css";
 import { useNavigate } from "react-router-dom";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -8,18 +14,10 @@ const Rooms = () => {
   const [units, setUnits] = useState([]);
   const navigate = useNavigate();
 
-  const updateUnit = (id) => {
-    navigate(`/updateunit/${id}`);
-  };
-
-  const deleteUnit = async (id) => {
-    // Assuming 'bookings' is the correct collection name in your Firestore
-    // Replace 'bookings' with your actual collection name if needed
-    await deleteDoc(doc(db, "bookings", id));
-  };
-
-  const addRoom = () => {
-    navigate("/addunit");
+  // Function to handle the "View" button click
+  const viewUnit = (unitId) => {
+    // Navigate to the ViewRooms component with the unitId as a parameter
+    navigate(`/viewroom/${unitId}`);
   };
 
   const unitCollectionRef = collection(db, "bookings");
@@ -38,27 +36,31 @@ const Rooms = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>Booked rooms</h1>
-
       <div className={styles.room_container}>
         <div className={styles.room_subcontainer}>
-          {/* Your existing room elements */}
-          {/* ... */}
-
           {units.map((unit) => {
             return (
               <div className={styles.unit} key={unit.id}>
-                {/* Render your room data here */}
-                <img src={unit.Img} alt="royal unit" />
+                <img src={unit.Img} alt="room unit" />
                 <div className={styles.availability}>
-                  <p>{unit.Guest}</p> <br />
-                  <p className={styles.sub_text}>
-                    <span className={styles.icon_spacing}>
-                      <i className="fa-solid fa-user"></i>X 2{" "}
-                    </span>
-                    <i className="fa-solid fa-moon"></i>
-                    {unit.Date}
+                  <p className={styles.specifications}>
+                    <FontAwesomeIcon icon={faBuilding} /> {/* Building icon */}
+                    Category: {unit.name || "N/A"}
                   </p>
+                  <p className={styles.specifications}>
+                    <FontAwesomeIcon icon={faBed} /> {/* Bed icon */}
+                    Bedrooms: {unit.Specifications.bedrooms || "N/A"}
+                  </p>
+                  <p className={styles.specifications}>
+                    <FontAwesomeIcon icon={faMoneyBill} /> {/* Money icon */}
+                    Price: R{unit.price || "N/A"}
+                  </p>
+                  <button
+                    className={styles.btn}
+                    onClick={() => viewUnit(unit.id)} // Pass unit.id as unitId
+                  >
+                    View
+                  </button>
                 </div>
               </div>
             );

@@ -9,10 +9,11 @@ import Register from "./components/Register/Register";
 import AddUnit from "./components/Admin/pages/addUnit";
 import UpdatePage from "./components/Admin/pages/UpdatePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ViewRooms from "./components/Rooms/ViewRoom";
+import Payment from "./components/Rooms/Payment";
 
 const Home = () => {
   return (
-    
     <>
       <Router>
         <Routes>
@@ -21,7 +22,9 @@ const Home = () => {
           <Route path="/hotel" element={<HotelPage />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/rooms" element={<Rooms />} />
-          <Route path="/room-details/:roomName" element={<RoomDetails />} />
+          <Route path="/payment" element={<Payment />} />
+          {/* <Route path="/room-details/:roomName" element={<RoomDetails />} /> */}
+          <Route path="/viewroom/:unitId" element={<ViewRooms />} />
           //recently added for navigating between room details
           <Route path="/updateunit/:id" element={<UpdatePage />} />
           <Route path="/addunit" element={<AddUnit />} />

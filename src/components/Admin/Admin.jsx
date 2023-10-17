@@ -1,27 +1,19 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase-config";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  onSnapshot,
-  updateDoc,
-  deleteDoc,
-} from "firebase/firestore";
-import { async } from "@firebase/util";
+import { collection, onSnapshot, deleteDoc } from "firebase/firestore";
 import styles from "./Admin.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  basic,
-  comfort,
-  blueroom,
-  royal,
-  goldroom,
-  deluxroom,
-  superdelux,
-} from "../imports";
+  faBed,
+  faBath,
+  faDumbbell,
+  faCar,
+  faShieldAlt,
+  faCirclePlus,
+  faUser,
+  faMoneyBillWave,
+} from "@fortawesome/free-solid-svg-icons";
 
 const iconSize = {
   fontSize: "25px",
@@ -64,67 +56,70 @@ const Admin = () => {
     <div className={styles.container}>
       <div className={styles.search_bar}>
         <h2>Whiteman Lodge</h2>
-        <input type="text" placeholder="search" />
+    
         <h2 className={styles.admin_icon}>
-          <i class="fa-solid fa-user"></i>Admin
+          <FontAwesomeIcon icon={faUser} />
+          Admin
         </h2>
       </div>
       <div className={styles.options}>
         <button style={{ marginRight: 10 }}>
-          <i class="fa-solid fa-bed" style={{ ...iconSize }}></i>
+          <FontAwesomeIcon icon={faBed} style={{ ...iconSize }} />
           All rooms
         </button>
 
         <button onClick={addRoom}>
-          <i class="fa-solid fa-circle-plus" style={{ ...iconSize }} />
-          Create new booking
+          <FontAwesomeIcon icon={faCirclePlus} style={{ ...iconSize }} />
+         Add Room
         </button>
       </div>
-
       <div className={styles.bar}>
         <h2>Hotel Suites</h2>
       </div>
       <div className={styles.unit_container}>
-        {/* Map through the units and render them */}
         {units.map((unit) => {
           return (
             <div className={styles.unit} key={unit.id}>
               <img src={unit.Img} alt="room unit" />
               <div className={styles.availability}>
                 <span className={styles.sub_text}>
-                  <i class="fa-solid fa-moon"></i> {unit.Date}
+                  <FontAwesomeIcon icon={faCirclePlus} /> {unit.Date}
                 </span>
-                {/* Render specifications here */}
                 <p className={styles.specifications}>
                   <span>
-                    <i class="fa-solid fa-bed"></i>{" "}
+                    <FontAwesomeIcon icon={faBed} />{" "}
                     {unit.Specifications.bedrooms} Bedrooms
                   </span>
                   <br />
                   <span>
-                    <i class="fa-solid fa-bath"></i>{" "}
+                    <FontAwesomeIcon icon={faBath} />{" "}
                     {unit.Specifications.bathrooms} Bathrooms
                   </span>
                   <br />
                   <span>
                     {unit.Specifications.hasGym && (
-                      <i class="fa-solid fa-dumbbell"></i>
+                      <FontAwesomeIcon icon={faDumbbell} />
                     )}{" "}
                     Gym Available
                   </span>
                   <br />
                   <span>
                     {unit.Specifications.hasFreeParking && (
-                      <i class="fa-solid fa-car"></i>
+                      <FontAwesomeIcon icon={faCar} />
                     )}{" "}
                     Free Parking
                   </span>
                   <br />
                   <span>
                     {unit.Specifications.has24HrSecurity && (
-                      <i class="fa-solid fa-shield-check"></i>
+                      <FontAwesomeIcon icon={faShieldAlt} />
                     )}
                     24-Hr Security
+                  </span>
+                  <br />
+                  <span>
+                    <FontAwesomeIcon icon={faMoneyBillWave} /> R
+                    {unit.price || "N/A"}
                   </span>
                 </p>
                 <button

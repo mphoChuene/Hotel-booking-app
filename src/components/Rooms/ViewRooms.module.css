@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    flex-direction: row-reverse;
+    gap:200px ;
+    margin-top: 20px;
+    margin-right: 200px;
+}
+.roomCont{
+    margin-top: 75px;
+}
+
+.img{
+    border-radius: 0;
+}
+
+.Specifications {
+    margin-top: 50px;
+}
+.title{
+    font-size: 35px;
+}

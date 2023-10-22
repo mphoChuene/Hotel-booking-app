@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../firebase-config";
+import { db, doc } from "../../firebase-config";
 import { collection, onSnapshot, deleteDoc } from "firebase/firestore";
 import styles from "./Admin.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +29,8 @@ const Admin = () => {
   };
 
   const deleteUnit = async (id) => {
-    await deleteDoc(doc(db, "bookings", id));
+    const unitDoc = doc(db, "bookings", id);
+    await deleteDoc(unitDoc);
   };
 
   const addRoom = () => {
@@ -56,7 +57,7 @@ const Admin = () => {
     <div className={styles.container}>
       <div className={styles.search_bar}>
         <h2>Whiteman Lodge</h2>
-    
+
         <h2 className={styles.admin_icon}>
           <FontAwesomeIcon icon={faUser} />
           Admin
@@ -70,7 +71,7 @@ const Admin = () => {
 
         <button onClick={addRoom}>
           <FontAwesomeIcon icon={faCirclePlus} style={{ ...iconSize }} />
-         Add Room
+          Add Room
         </button>
       </div>
       <div className={styles.bar}>

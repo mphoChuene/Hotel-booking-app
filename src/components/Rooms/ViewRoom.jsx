@@ -48,13 +48,16 @@ const ViewRooms = () => {
     // Amount should be in kobo (i.e., amount * 100)
     const amountInKobo = roomDetails.price * 100;
 
+    // Generate the reference here, after roomDetails is available
+    const reference = `room_${roomDetails.id}_${Date.now()}`;
+
     // Initialize Paystack payment
     const paystack = window.PaystackPop.setup({
       key: publicKey,
       email: 'Mphochuene42@gmail.com', // Replace with the customer's email
       amount: amountInKobo,
-      currency: 'Zar', // Replace with the appropriate currency code
-      ref: `room_${roomDetails.id}`, // Replace with a unique reference
+      currency: 'ZAR', // Replace with the appropriate currency code
+      ref: reference, // Use the dynamically generated reference
       callback: (response) => {
         // Handle the Paystack callback, e.g., update your database
         console.log(response);

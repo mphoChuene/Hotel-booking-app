@@ -11,6 +11,7 @@ import UpdatePage from "./components/Admin/pages/UpdatePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ViewRooms from "./components/Rooms/ViewRoom";
 import Payment from "./components/Rooms/Payment";
+import PaymentWithStripe from "./components/Rooms/PaymentWithStripe";
 
 const Home = () => {
   return (
@@ -23,9 +24,9 @@ const Home = () => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/rooms" element={<Rooms />} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/PaymentWithStripe" element={<PaymentWithStripe />} />
           {/* <Route path="/room-details/:roomName" element={<RoomDetails />} /> */}
           <Route path="/viewroom/:unitId" element={<ViewRooms />} />
-          //recently added for navigating between room details
           <Route path="/updateunit/:id" element={<UpdatePage />} />
           <Route path="/addunit" element={<AddUnit />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />

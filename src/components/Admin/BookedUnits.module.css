@@ -1,0 +1,17 @@
+/* BookedUnit.module.css */
+.bookedUnitContainer {
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .unitImage {
+    max-width: 200px;
+    height: 200px;
+  }
+  
+  /* Add more styles for responsiveness and adaptation as needed */
+  

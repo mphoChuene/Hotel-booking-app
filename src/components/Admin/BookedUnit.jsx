@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db,auth } from "../../firebase-config";
+import styles from './BookedUnits.module.css'
 import { collection, getDocs } from "firebase/firestore";
 
 const BookedUnit = () => {
@@ -29,10 +30,10 @@ const BookedUnit = () => {
     <div>
       <h2>Booked Units</h2>
       {bookedUnits.map((unit, index) => (
-        <div key={index}>
-          <h3>Unit {index + 1}</h3>
-          <img src={unit.roomDetails.Img} alt={unit.roomDetails.name} />
-          <p>Date: {unit.roomDetails.date}</p>
+        <div key={index} className={styles.bookedUnitContainer}>
+          <h3> {unit.roomDetails.name} Unit</h3>
+          <img src={unit.roomDetails.Img} alt={unit.roomDetails.name}  className={styles.unitImage} />
+          <p>Date: {unit.roomDetails.Date}</p>
           <p>Guest: {auth.currentUser.email}</p>
           <p>Bathrooms: {unit.roomDetails.Specifications.bathrooms}</p>
           <p>Timestamp: {unit.timestamp.toDate().toLocaleString()}</p>

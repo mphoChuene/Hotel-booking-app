@@ -14,6 +14,7 @@ import {
   faUser,
   faMoneyBillWave,
 } from "@fortawesome/free-solid-svg-icons";
+import BookedUnit from "./BookedUnit";
 
 const iconSize = {
   fontSize: "25px",
@@ -140,6 +141,9 @@ const Admin = () => {
           );
         })}
       </div>
+
+      <BookedUnit/>
+
     </div>
   );
 };

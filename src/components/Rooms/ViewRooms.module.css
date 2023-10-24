@@ -1,21 +1,33 @@
-.container{
+* {
+    font-family: "poppins";
+  }
+  
+  .container {
     display: flex;
-    flex-direction: row-reverse;
-    gap:200px ;
-    margin-top: 20px;
-    margin-right: 200px;
+    align-items: center;
+    scale: 0.90;
+    /* gap: 10px; Add margin to separate elements */
+    margin: 50px; /* Adjust the margin as needed */
 }
-.roomCont{
-    margin-top: 75px;
+  
+  
+  .roomCont {
+    display: flex;
+    align-items: center; /* Center content within roomCont */
+    margin-top: 20px; /* Adjust margin to your preference */
+  }
+  
+  .img {
+    border-radius: 0; /* Reset border-radius if needed */
+  }
+  
+  .Specifications {
+    text-align: center; /* Center text within Specifications */
+    margin-top: 10px; /* Adjust margin to your preference */
+    margin-right: 10vw;
 }
-
-.img{
-    border-radius: 0;
-}
-
-.Specifications {
-    margin-top: 50px;
-}
-.title{
+  
+  .title {
     font-size: 35px;
-}
+  }
+  

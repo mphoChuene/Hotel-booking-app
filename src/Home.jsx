@@ -10,6 +10,7 @@ import AddUnit from "./components/Admin/pages/addUnit";
 import UpdatePage from "./components/Admin/pages/UpdatePage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ViewRooms from "./components/Rooms/ViewRoom";
+import BookedUnit from "./components/Admin/BookedUnit";
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
           <Route path="/rooms" element={<Rooms />} />
           {/* <Route path="/room-details/:roomName" element={<RoomDetails />} /> */}
           <Route path="/viewroom/:unitId" element={<ViewRooms />} />
+          {/* <Route path="/bookedUnit" element={<BookedUnit />} /> */}
           <Route path="/updateunit/:id" element={<UpdatePage />} />
           <Route path="/addunit" element={<AddUnit />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />

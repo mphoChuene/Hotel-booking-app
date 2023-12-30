@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   faBed,
   faMoneyBill,
@@ -14,9 +14,7 @@ const Rooms = () => {
   const [units, setUnits] = useState([]);
   const navigate = useNavigate();
 
-  // Function to handle the "View" button click
   const viewUnit = (unitId) => {
-    // Navigate to the ViewRooms component with the unitId as a parameter
     navigate(`/viewroom/${unitId}`);
   };
 
@@ -36,35 +34,40 @@ const Rooms = () => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.heading}>
+        <h1>Our Room Categories</h1>
+        <p>Explore a range of rooms from basic to luxury.</p>
+      </div>
       <div className={styles.room_container}>
         <div className={styles.room_subcontainer}>
-          {units.map((unit) => {
-            return (
-              <div className={styles.unit} key={unit.id}>
-                <img src={unit.Img} alt="room unit" />
-                <div className={styles.availability}>
-                  <p className={styles.specifications}>
-                    <FontAwesomeIcon icon={faBuilding} /> {/* Building icon */}
-                    Category: {unit.name || "N/A"}
-                  </p>
-                  <p className={styles.specifications}>
-                    <FontAwesomeIcon icon={faBed} /> {/* Bed icon */}
-                    Bedrooms: {unit.Specifications.bedrooms || "N/A"}
-                  </p>
-                  <p className={styles.specifications}>
-                    <FontAwesomeIcon icon={faMoneyBill} /> {/* Money icon */}
-                    Price: R{unit.price || "N/A"}
-                  </p>
-                  <button
-                    className={styles.btn}
-                    onClick={() => viewUnit(unit.id)} // Pass unit.id as unitId
-                  >
-                    View
-                  </button>
-                </div>
+          {units.map((unit) => (
+            <div className={styles.unit} key={unit.id}>
+              <img
+                src={unit.Img}
+                alt="Room Unit"
+                className={styles.roomImage}
+              />
+              <div className={styles.availability}>
+                <p className={styles.specifications}>
+                  <FontAwesomeIcon icon={faBuilding} /> Category:{" "}
+                  {unit.name || "N/A"}
+                </p>
+                <p className={styles.specifications}>
+                  <FontAwesomeIcon icon={faBed} /> Bedrooms:{" "}
+                  {unit.Specifications.bedrooms || "N/A"}
+                </p>
+                <p className={styles.specifications}>
+                  <FontAwesomeIcon icon={faMoneyBill} /> Price: R
+                  {unit.price || "N/A"}
+                </p>
+                <button
+                  className={styles.btn}
+                  onClick={() => viewUnit(unit.id)}>
+                  View
+                </button>
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </div>

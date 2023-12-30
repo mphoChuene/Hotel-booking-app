@@ -6,24 +6,24 @@ import styles from "../category/Category.module.css";
 import Rooms from "../Rooms/Rooms";
 
 const Category = () => {
-  const [units, setUnits] = useState([]);
-  const navigate = useNavigate();
+  // const [units, setUnits] = useState([]);
+  // const navigate = useNavigate();
 
-  // Fetch units from Firebase Firestore
-  useEffect(() => {
-    const unitCollectionRef = collection(db, "bookings"); // Replace with your collection name
-    const q = query(unitCollectionRef, orderBy("name")); // You can order by a different field
+  // // Fetch units from Firebase Firestore
+  // useEffect(() => {
+  //   const unitCollectionRef = collection(db, "bookings"); // Replace with your collection name
+  //   const q = query(unitCollectionRef, orderBy("name")); // You can order by a different field
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setUnits(data);
-    });
+  //   const unsubscribe = onSnapshot(q, (snapshot) => {
+  //     const data = snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //     setUnits(data);
+  //   });
 
-    return () => unsubscribe();
-  }, []);
+  //   return () => unsubscribe();
+  // }, []);
 
   return (
     <div className={styles.container}>

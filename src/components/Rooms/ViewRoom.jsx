@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./ViewRooms.module.css";
 import { db } from "../../firebase-config";
@@ -44,7 +44,7 @@ const ViewRooms = () => {
   // Function to handle Paystack payment
   const handlePaystackPayment = () => {
     // Replace with your Paystack public key
-    const publicKey = 'pk_test_e2727380bb9d57851e6db041e8e538d206fd13fb';
+    const publicKey = "pk_test_e2727380bb9d57851e6db041e8e538d206fd13fb";
 
     // Amount should be in kobo (i.e., amount * 100)
     const amountInKobo = roomDetails.price * 100;
@@ -55,9 +55,9 @@ const ViewRooms = () => {
     // Initialize Paystack payment
     const paystack = window.PaystackPop.setup({
       key: publicKey,
-      email: 'Mphochuene42@gmail.com', // Replace with the customer's email
+      email: "Mphochuene42@gmail.com", // Replace with the customer's email
       amount: amountInKobo,
-      currency: 'ZAR', // Replace with the appropriate currency code
+      currency: "ZAR", // Replace with the appropriate currency code
       ref: reference, // Use the dynamically generated reference
       callback: (response) => {
         // Handle the Paystack callback, e.g., update your database
@@ -88,27 +88,36 @@ const ViewRooms = () => {
     // Call the function to add the reservation after payment
     addReservation();
   };
-  
 
   return (
     <div className={styles.container}>
       <div className={styles.roomCont}>
-        <img src={roomDetails.Img} alt={roomDetails.name} className={styles.img} />
+        <img
+          src={roomDetails.Img}
+          alt={roomDetails.name}
+          className={styles.img}
+        />
       </div>
       <div className={styles.Specifications}>
         <h2>Room Specifications</h2>
         <p>
-          <FontAwesomeIcon icon={faMoneyBillWave} /> Price: R{roomDetails.price || "N/A"}
+          <FontAwesomeIcon icon={faMoneyBillWave} /> Price: R
+          {roomDetails.price || "N/A"}
           <br />
-          <FontAwesomeIcon icon={faBed} /> Bedrooms: {roomDetails.Specifications?.bedrooms || "N/A"}
+          <FontAwesomeIcon icon={faBed} /> Bedrooms:{" "}
+          {roomDetails.Specifications?.bedrooms || "N/A"}
           <br />
-          <FontAwesomeIcon icon={faBath} /> Bathrooms: {roomDetails.Specifications?.bathrooms || "N/A"}
+          <FontAwesomeIcon icon={faBath} /> Bathrooms:{" "}
+          {roomDetails.Specifications?.bathrooms || "N/A"}
           <br />
-          <FontAwesomeIcon icon={faDumbbell} /> Gym: {roomDetails.Specifications?.hasGym ? "Yes" : "No"}
+          <FontAwesomeIcon icon={faDumbbell} /> Gym:{" "}
+          {roomDetails.Specifications?.hasGym ? "Yes" : "No"}
           <br />
-          <FontAwesomeIcon icon={faCar} /> Free Parking: {roomDetails.Specifications?.hasFreeParking ? "Yes" : "No"}
+          <FontAwesomeIcon icon={faCar} /> Free Parking:{" "}
+          {roomDetails.Specifications?.hasFreeParking ? "Yes" : "No"}
           <br />
-          <FontAwesomeIcon icon={faShieldAlt} /> 24-Hr Security: {roomDetails.Specifications?.has24HrSecurity ? "Yes" : "No"}
+          <FontAwesomeIcon icon={faShieldAlt} /> 24-Hr Security:{" "}
+          {roomDetails.Specifications?.has24HrSecurity ? "Yes" : "No"}
           <br />
         </p>
         <button onClick={handlePaystackPayment}>Checkout</button>

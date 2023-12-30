@@ -6,11 +6,19 @@ import "./Login.css";
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
-  const navigate = useNavigate();
   const [loginPassword, setLoginPassword] = useState("");
+  const navigate = useNavigate();
 
-  const Signin = async (e) => {
-    e.preventDefault();
+  const handleEmailChange = (event) => {
+    setLoginEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setLoginPassword(event.target.value);
+  };
+
+  const Signin = async (event) => {
+    event.preventDefault();
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -36,16 +44,12 @@ const Login = () => {
             <input
               type="email"
               placeholder="email"
-              onChange={(event) => {
-                setLoginEmail(event.target.value);
-              }}
+              onChange={handleEmailChange}
             />
             <input
               type="password"
               placeholder="password"
-              onChange={(event) => {
-                setLoginPassword(event.target.value);
-              }}
+              onChange={handlePasswordChange}
             />
             <button onClick={Signin}>Login</button>
             <p className="message">

@@ -6,7 +6,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Skeleton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./Rooms.module.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import Room from "./Room";

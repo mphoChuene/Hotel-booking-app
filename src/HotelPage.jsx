@@ -13,7 +13,6 @@ const HotelPage = () => {
     <>
       <Navbar />
       <Hero />
-      <Room />
       <Rooms />
       <Newsletter />
       <Footer />

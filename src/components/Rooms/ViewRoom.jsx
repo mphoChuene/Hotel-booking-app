@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import styles from "./ViewRooms.module.css";
 import { db } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
@@ -13,6 +12,16 @@ import {
   faCar,
   faShieldAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import Slider from "react-slick";
+import Footer from "../Footer/Footer";
+import Newsletter from "../newsletter/Newsletter";
+import styled from "styled-components";
+import Navbar from "../Navbar/Navbar";
+
+const Container = styled.div``;
+const Image = styled.div``;
+const UnitDesc = styled.div``;
+const Name = styled.h5``;
 
 const ViewRooms = () => {
   const { unitId } = useParams();
@@ -89,16 +98,40 @@ const ViewRooms = () => {
     addReservation();
   };
 
+  const carouselSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
+
   return (
-    <div className={styles.container}>
-      <div className={styles.roomCont}>
-        <img
-          src={roomDetails.Img}
-          alt={roomDetails.name}
-          className={styles.img}
-        />
-      </div>
-      <div className={styles.Specifications}>
+    <Container>
+      <Navbar />
+      <Slider {...carouselSettings}>
+        <Image>
+          <img src={roomDetails.Img} />
+        </Image>
+      </Slider>
+
+      <UnitDesc>
+        <Name>Private room in resort in Thabo Mofutsanyane</Name>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            listStyleType: "none",
+          }}>
+          <li style={{ marginRight: "30px" }}>guest</li>
+          <li style={{ marginRight: "30px" }}>bedrooms</li>
+          <li style={{ marginRight: "30px" }}>beds</li>
+          <li style={{ marginRight: "30px" }}>baths</li>
+        </div>
+        
+      </UnitDesc>
+
+      {/* <div className={styles.Specifications}>
         <h2>Room Specifications</h2>
         <p>
           <FontAwesomeIcon icon={faMoneyBillWave} /> Price: R
@@ -121,8 +154,10 @@ const ViewRooms = () => {
           <br />
         </p>
         <button onClick={handlePaystackPayment}>Checkout</button>
-      </div>
-    </div>
+      </div> */}
+      <Newsletter />
+      <Footer />
+    </Container>
   );
 };
 

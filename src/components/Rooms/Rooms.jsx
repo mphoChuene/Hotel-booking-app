@@ -7,18 +7,13 @@ import {
 import { Skeleton } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./Rooms.module.css";
-import { useNavigate } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import Room from "./Room";
 
 const Rooms = () => {
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  const viewUnit = (unitId) => {
-    navigate(`/viewroom/${unitId}`);
-  };
 
   const fetchUnits = async () => {
     try {
@@ -45,47 +40,29 @@ const Rooms = () => {
         <h1>Our Room Categories</h1>
         <p>Explore a range of rooms from basic to luxury.</p>
       </div>
-      <div className={styles.room_container}>
-        <div className={styles.room_subcontainer}>
-          {loading ? (
-            // Skeleton while loading
-            <Skeleton
-              variant="rectangular"
-              width={300}
-              height={200}
-              animation="pulse"
+      <div
+        className={styles.room_container}
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+        {loading ? (
+          // Skeleton while loading
+          <Skeleton
+            variant="rectangular"
+            width={300}
+            height={200}
+            animation="pulse"
+          />
+        ) : (
+          units.map((unit) => (
+            <Room
+              unit={unit}
+              key={unit.id}
+              Img={unit.Img}
+              name={unit.name}
+              price={unit.price}
+              unitId={unit.id}
             />
-          ) : (
-            units.map((unit) => (
-              <div className={styles.unit} key={unit.id}>
-                <img
-                  src={unit.Img}
-                  alt="Room Unit"
-                  className={styles.roomImage}
-                />
-                <div className={styles.availability}>
-                  <p className={styles.specifications}>
-                    <FontAwesomeIcon icon={faBuilding} /> Category:{" "}
-                    {unit.name || "N/A"}
-                  </p>
-                  <p className={styles.specifications}>
-                    <FontAwesomeIcon icon={faBed} /> Bedrooms:{" "}
-                    {unit.Specifications.bedrooms || "N/A"}
-                  </p>
-                  <p className={styles.specifications}>
-                    <FontAwesomeIcon icon={faMoneyBill} /> Price: R
-                    {unit.price || "N/A"}
-                  </p>
-                  <button
-                    className={styles.btn}
-                    onClick={() => viewUnit(unit.id)}>
-                    View
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
+          ))
+        )}
       </div>
     </div>
   );

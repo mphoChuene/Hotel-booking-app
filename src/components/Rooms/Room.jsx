@@ -8,6 +8,7 @@ import {
   Button,
 } from "@mui/material";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: "flex";
@@ -20,7 +21,7 @@ const SubContainer = styled.div`
   flex-direction: "row";
   max-width: "720px";
 `;
-const Image = styled.img``;
+
 const Wrapper = styled.div``;
 const Heading = styled.h2`
   font-size: 23px;
@@ -36,9 +37,16 @@ const Price = styled.h4`
   font-size: 18px;
   margin-top: 15px;
 `;
+const Room = (unit) => {
+  const navigate = useNavigate();
 
-const Room = ({ unit }) => {
+  const viewUnit = () => {
+    navigate(`/viewroom/${unit.unitId}`);
+
+    console.log(unit.unitId);
+  };
   const [rating, setRating] = useState(4);
+
   return (
     <Card
       sx={{
@@ -50,7 +58,7 @@ const Room = ({ unit }) => {
       <Container>
         <CardMedia
           component="img"
-          image="https://images.unsplash.com/photo-1455587734955-081b22074882?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aG90ZWx8ZW58MHx8MHx8fDA%3D"
+          image={unit.Img}
           style={{
             objectFit: "contain",
             alignSelf: "center",
@@ -60,7 +68,7 @@ const Room = ({ unit }) => {
         />
         <Wrapper>
           <SubContainer>
-            {/* <Heading>{unit.name}</Heading> */}
+            <Heading>{unit.name}</Heading>
             <Rating
               name="simple-controlled"
               value={rating}
@@ -74,7 +82,7 @@ const Room = ({ unit }) => {
           <Text>beach and garden views</Text>
           <Text>feb 11 -16</Text>
           <Price style={{ textAlign: "left", marginLeft: "10px" }}>
-            R2500 ZAR night
+            R{unit.price} ZAR night
           </Price>
           <CardActions
             sx={{
@@ -82,7 +90,7 @@ const Room = ({ unit }) => {
               justifyContent: "center",
               alignItems: "center",
             }}>
-            <button>View</button>
+            <button onClick={viewUnit}>View</button>
           </CardActions>
         </Wrapper>
       </Container>

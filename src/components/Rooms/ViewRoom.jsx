@@ -34,12 +34,12 @@ const Container = styled.div`
 const Image = styled.div``;
 const UnitDesc = styled.div`
   border-bottom: 1px solid grey;
-  width: 25%;
+  width: 70%;
 `;
 const Name = styled.h5``;
 const Divider = styled.div`
   border-bottom: 1px solid grey;
-  width: 25%;
+  width: 70%;
   margin-top: 2dvh;
 `;
 
@@ -48,6 +48,8 @@ const Text = styled.p``;
 const Heading = styled.h6``;
 
 const MainContainer = styled.div``;
+const SubContainer = styled.div``;
+const BookingContainer = styled.div``;
 
 const ViewRooms = () => {
   const { unitId } = useParams();
@@ -138,6 +140,7 @@ const ViewRooms = () => {
   return (
     <MainContainer>
       <Navbar />
+
       <Container
         style={{
           backgroundColor: "#fff",
@@ -168,6 +171,21 @@ const ViewRooms = () => {
             <li style={{ marginRight: "30px" }}>4 baths</li>
           </div>
           <Rating name="size-small" defaultValue={5} size="small" readOnly />
+          <BookingContainer>
+            <Heading>PRICE ZAR</Heading>
+            <button
+              style={{
+                backgroundColor: "yellow",
+                color: "#000",
+                width: "10%",
+                height: "5dvh",
+                justifyContent: "center",
+                display: "flex",
+                marginTop: "0px",
+              }}>
+              Reserve
+            </button>
+          </BookingContainer>
         </UnitDesc>
         <Divider>
           <Heading
@@ -196,7 +214,7 @@ const ViewRooms = () => {
             style={{
               backgroundColor: "whitesmoke",
               color: "#000",
-              width: "30%",
+              width: "12%",
               height: "5dvh",
               justifyContent: "center",
               display: "flex",
@@ -356,6 +374,7 @@ const ViewRooms = () => {
         <button onClick={handlePaystackPayment}>Checkout</button>
       </div> */}
       </Container>
+
       <Newsletter />
       <Footer />
     </MainContainer>

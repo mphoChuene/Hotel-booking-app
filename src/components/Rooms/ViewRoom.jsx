@@ -231,26 +231,31 @@ const ViewRooms = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              "& .MuiPaper-root": {
+                maxHeight: "100vh", // Set a maximum height for the modal
+                overflowY: "auto", // Enable vertical scrolling if content exceeds maxHeight
+              },
             }}>
-            <Box
-              sx={{
+            <div
+              style={{
                 backgroundColor: "#fff",
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "left",
                 flexDirection: "column",
-                width: "50%",
-                padding: "0 3dvw",
+                alignItems: "left",
+                padding: "20px", // Adjust padding as needed
                 borderRadius: "20px",
+                maxHeight: "95vh", // Set a maximum height to enable scrolling
+                overflowY: "auto", // Enable vertical scrolling
+                height: "100%", // Allow the height to adjust based on content
+                width: "50%",
               }}>
               <Typography
                 id="modal-modal-title"
                 variant="h5"
-                component="h2"
-                sx={{ fontFamily: "poppins", fontWeight: "bold" }}>
+                component="h5"
+                style={{ fontWeight: "bold",marginBottom:'10px' }}>
                 About this unit
               </Typography>
-              <Heading style={{ marginTop: "1dvh" }}>the unit</Heading>
               <Text>
                 Fully self catering, free standing Villa sleeping a maximum 8
                 people Main bedroom has a king size bed with en-suite bathroom
@@ -312,7 +317,7 @@ const ViewRooms = () => {
                 directly to the resort. Kindly note the number of guests will
                 not be allowed to exceed the max sleeper size per unit.
               </Text>
-            </Box>
+            </div>
           </Modal>
         </Divider>
         <Divider>

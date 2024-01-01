@@ -34,13 +34,12 @@ const Rooms = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div className={styles.heading}>
+    <div>
+      <div>
         <h1>Our Room Categories</h1>
         <p>Explore a range of rooms from basic to luxury.</p>
       </div>
       <div
-        className={styles.room_container}
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
         {loading ? (
           // Skeleton while loading

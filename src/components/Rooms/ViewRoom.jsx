@@ -11,13 +11,23 @@ import {
   faDumbbell,
   faCar,
   faShieldAlt,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import Slider from "react-slick";
 import Footer from "../Footer/Footer";
 import Newsletter from "../newsletter/Newsletter";
 import styled from "styled-components";
 import Navbar from "../Navbar/Navbar";
-import { Box, Button, Modal, Rating, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputAdornment,
+  MenuItem,
+  Modal,
+  Rating,
+  TextField,
+  Typography,
+} from "@mui/material";
 import {
   Bathtub,
   FitnessCenter,
@@ -27,6 +37,9 @@ import {
   Restaurant,
   Tv,
 } from "@mui/icons-material";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const Container = styled.div`
   background-color: "#fff";
@@ -35,6 +48,9 @@ const Image = styled.div``;
 const UnitDesc = styled.div`
   border-bottom: 1px solid grey;
   width: 70%;
+  display: "flex";
+  flex-direction: "row";
+  margin-top: 5dvh;
 `;
 const Name = styled.h5``;
 const Divider = styled.div`
@@ -51,9 +67,50 @@ const MainContainer = styled.div``;
 const SubContainer = styled.div``;
 const BookingContainer = styled.div``;
 
+const currencies = [
+  {
+    value: "1",
+    label: "One",
+  },
+  {
+    value: "2",
+    label: "Two",
+  },
+  {
+    value: "3",
+    label: "Three",
+  },
+  {
+    value: "4",
+    label: "Four",
+  },
+  {
+    value: "5",
+    label: "Five",
+  },
+  {
+    value: "6",
+    label: "Six",
+  },
+  {
+    value: "7",
+    label: "Seven",
+  },
+  {
+    value: "8",
+    label: "Eight",
+  },
+  {
+    value: "9",
+    label: "Nine",
+  },
+];
+
 const ViewRooms = () => {
   const { unitId } = useParams();
   const [roomDetails, setRoomDetails] = useState(null);
+  const [checkin, setCheckin] = useState(null);
+  const [checkout, setsetCheckout] = useState(null);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -114,6 +171,8 @@ const ViewRooms = () => {
         const newReservation = {
           roomDetails: roomDetails, // You can modify this structure as needed
           timestamp: new Date(), // You can add a timestamp to the reservation
+          checkin,
+          checkout
         };
 
         // Add the reservation to the 'reservation' collection
@@ -156,36 +215,104 @@ const ViewRooms = () => {
           </Image>
         </Slider>
 
-        <UnitDesc>
-          <Name>Private room in resort in Thabo Mofutsanyane</Name>
+        <UnitDesc
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}>
+          <SubContainer>
+            <Name>Private room in resort in Thabo Mofutsanyane</Name>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              listStyleType: "none",
-            }}>
-            <li style={{ marginRight: "30px" }}>8 guest</li>
-            <li style={{ marginRight: "30px" }}>4 bedrooms</li>
-            <li style={{ marginRight: "30px" }}>6 beds</li>
-            <li style={{ marginRight: "30px" }}>4 baths</li>
-          </div>
-          <Rating name="size-small" defaultValue={5} size="small" readOnly />
-          <BookingContainer>
-            <Heading>PRICE ZAR</Heading>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                listStyleType: "none",
+              }}>
+              <li style={{ marginRight: "30px" }}>8 guest</li>
+              <li style={{ marginRight: "30px" }}>4 bedrooms</li>
+              <li style={{ marginRight: "30px" }}>6 beds</li>
+              <li style={{ marginRight: "30px" }}>4 baths</li>
+            </div>
+            <Rating name="size-small" defaultValue={5} size="small" readOnly />
             <button
               style={{
                 backgroundColor: "yellow",
                 color: "#000",
-                width: "10%",
+                width: "20%",
                 height: "5dvh",
                 justifyContent: "center",
+                textAlign: "center",
+                alignItems: "center",
                 display: "flex",
                 marginTop: "0px",
               }}>
               Reserve
             </button>
-          </BookingContainer>
+          </SubContainer>
+          <Box
+            sx={{
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.6)",
+              padding: "20px",
+              borderRadius: "10px",
+              marginBottom: "10px",
+            }}>
+            <BookingContainer>
+              <Heading>
+                PRICE: R{roomDetails.price || "N/A"} ZAR per night
+              </Heading>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  // backgroundColor: "blue",
+                  alignItems: "center",
+                }}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <SubContainer
+                    style={{ display: "flex", flexDirection: "column" }}>
+                    <label style={{ marginLeft: 10 }}>check-in</label>
+                    <DatePicker
+                      value={checkin}
+                      onChange={(newValue) => setCheckin(newValue)}
+                      sx={{ width: "10vw", margin: "10px", padding: 0 }}
+                    />
+                  </SubContainer>
+                  <SubContainer
+                    style={{ display: "flex", flexDirection: "column" }}>
+                    <label style={{ marginLeft: 10 }}>check-out</label>
+                    <DatePicker
+                      value={checkout}
+                      onChange={(newValue) => setsetCheckout(newValue)}
+                      sx={{ width: "10vw", margin: "10px", padding: 0 }}
+                    />
+                  </SubContainer>
+                </LocalizationProvider>
+              </div>
+              <Text>Guests</Text>
+              <TextField
+                id="outlined-select-guests"
+                select
+                label="Select"
+                defaultValue="1"
+                helperText="Please select the number of guests"
+                sx={{ width: "22vw" }}
+                InputLabelProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <FontAwesomeIcon icon={faUsers} />
+                    </InputAdornment>
+                  ),
+                }}>
+                {currencies.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+            </BookingContainer>
+          </Box>
         </UnitDesc>
         <Divider>
           <Heading
@@ -253,7 +380,7 @@ const ViewRooms = () => {
                 id="modal-modal-title"
                 variant="h5"
                 component="h5"
-                style={{ fontWeight: "bold",marginBottom:'10px' }}>
+                style={{ fontWeight: "bold", marginBottom: "10px" }}>
                 About this unit
               </Typography>
               <Text>

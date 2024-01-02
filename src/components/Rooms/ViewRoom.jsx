@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -40,11 +41,12 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   background-color: "#fff";
 `;
-const Image = styled.div``;
+
 const UnitDesc = styled.div`
   border-bottom: 1px solid grey;
   width: 70%;
@@ -106,20 +108,50 @@ const currencies = [
   },
 ];
 
+const CarouselContainer = styled.div`
+  width: 70%;
+  margin: 0 auto;
+`;
+
+const Image = styled.div`
+  position: relative;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const ThumbnailContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+const Thumbnail = styled.img`
+  width: 50px;
+  height: auto;
+  margin: 0 5px;
+  cursor: pointer;
+`;
+
 const ViewRooms = () => {
   const { unitId } = useParams();
   const [roomDetails, setRoomDetails] = useState(null);
   const [checkin, setCheckin] = useState(null);
-  const [checkout, setsetCheckout] = useState(null);
+  const [checkout, setCheckout] = useState(null);
+  const [guest, setGuest] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRoomDetails = async () => {
       try {
         const roomDocRef = doc(db, "bookings", unitId);
         const roomSnapshot = await getDoc(roomDocRef);
+        console.log(guest);
 
         if (roomSnapshot.exists()) {
           setRoomDetails(roomSnapshot.data());
@@ -140,6 +172,12 @@ const ViewRooms = () => {
 
   // Function to handle Paystack payment
   const handlePaystackPayment = () => {
+    // Check if checkin, checkout, and guest are set
+    if (!checkin || !checkout || !guest) {
+      console.error("Check-in, check-out, and guest information are required.");
+      return;
+    }
+
     // Replace with your Paystack public key
     const publicKey = "pk_test_e2727380bb9d57851e6db041e8e538d206fd13fb";
 
@@ -159,33 +197,35 @@ const ViewRooms = () => {
       callback: (response) => {
         // Handle the Paystack callback, e.g., update your database
         console.log(response);
+
+        // Call the function to add the reservation after payment
+        addReservation();
       },
     });
 
     // Open the Paystack payment dialog
     paystack.openIframe();
+  };
 
-    const addReservation = async () => {
-      try {
-        const reservationRef = collection(db, "reservation"); // Reference to the 'reservation' collection
-        const newReservation = {
-          roomDetails: roomDetails, // You can modify this structure as needed
-          timestamp: new Date(), // You can add a timestamp to the reservation
-          checkin,
-          checkout
-        };
+  // Function to add reservation to Firestore
+  const addReservation = async () => {
+    try {
+      const reservationRef = collection(db, "reservation"); // Reference to the 'reservation' collection
+      const newReservation = {
+        roomDetails: roomDetails, // You can modify this structure as needed
+        timestamp: serverTimestamp(), // Use server timestamp
+        check_in: checkin instanceof Date ? checkin : new Date(checkin),
+        check_out: checkout instanceof Date ? checkout : new Date(checkout),
+        guest: guest,
+      };
 
-        // Add the reservation to the 'reservation' collection
-        await addDoc(reservationRef, newReservation);
+      // Add the reservation to the 'reservation' collection
+      await addDoc(reservationRef, newReservation);
 
-        console.log("Reservation added to Firestore");
-      } catch (error) {
-        console.error("Error adding reservation to Firestore:", error);
-      }
-    };
-
-    // Call the function to add the reservation after payment
-    addReservation();
+      console.log("Reservation added to Firestore");
+    } catch (error) {
+      console.error("Error adding reservation to Firestore:", error);
+    }
   };
 
   const carouselSettings = {
@@ -194,7 +234,11 @@ const ViewRooms = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    customPaging: (i) => (
+      <Thumbnail key={i} src={roomDetails.Img[i]} alt={`Thumbnail ${i}`} />
+    ),
   };
+  // console.log(roomDetails.Img[0]);
 
   return (
     <MainContainer>
@@ -209,11 +253,39 @@ const ViewRooms = () => {
           justifyContent: "center",
           width: "100%",
         }}>
-        <Slider {...carouselSettings}>
-          <Image>
-            <img src={roomDetails.Img} />
-          </Image>
-        </Slider>
+        <CarouselContainer>
+          {roomDetails.Img && roomDetails.Img.length > 0 ? (
+            <Slider {...carouselSettings}>
+              {roomDetails.Img.map((image, index) => (
+                <Image key={index}>
+                  <img
+                    src={image}
+                    alt={`Image ${index}`}
+                    style={{
+                      height: "80dvh",
+                      width: "100%",
+                      marginTop: "20px",
+                    }}
+                  />
+                </Image>
+              ))}
+            </Slider>
+          ) : (
+            <div>No images available</div>
+          )}
+          <ThumbnailContainer>
+            {roomDetails.carouselImages &&
+              roomDetails.carouselImages.length > 0 &&
+              roomDetails.carouselImages.map((image, index) => (
+                <Thumbnail
+                  key={index}
+                  src={image}
+                  alt={`Thumbnail ${index}`}
+                  onClick={() => Slider.slickGoTo(index)}
+                />
+              ))}
+          </ThumbnailContainer>
+        </CarouselContainer>
 
         <UnitDesc
           style={{
@@ -247,7 +319,8 @@ const ViewRooms = () => {
                 alignItems: "center",
                 display: "flex",
                 marginTop: "0px",
-              }}>
+              }}
+              onClick={handlePaystackPayment}>
               Reserve
             </button>
           </SubContainer>
@@ -284,7 +357,7 @@ const ViewRooms = () => {
                     <label style={{ marginLeft: 10 }}>check-out</label>
                     <DatePicker
                       value={checkout}
-                      onChange={(newValue) => setsetCheckout(newValue)}
+                      onChange={(newValue) => setCheckout(newValue)}
                       sx={{ width: "10vw", margin: "10px", padding: 0 }}
                     />
                   </SubContainer>
@@ -296,6 +369,8 @@ const ViewRooms = () => {
                 select
                 label="Select"
                 defaultValue="1"
+                value={guest}
+                onChange={(e) => setGuest(e.target.value)}
                 helperText="Please select the number of guests"
                 sx={{ width: "22vw" }}
                 InputLabelProps={{

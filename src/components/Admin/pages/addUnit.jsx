@@ -23,22 +23,22 @@ import MuiAlert from "@mui/material/Alert";
 import Grow from "@mui/material/Grow";
 import { styled } from "@mui/system";
 
-const Transition2 = React.forwardRef(function Transition2(props, ref) {
-  return <Grow ref={ref} {...props} />;
-});
+// const Transition2 = React.forwardRef(function Transition2(props, ref) {
+//   return <Grow ref={ref} {...props} />;
+// });
 
-const StyledAlert = styled(MuiAlert)(({ theme }) => ({
-  width: "100%",
-  "& .MuiAlert-icon": {
-    marginRight: theme.spacing(1),
-  },
-}));
+// const StyledAlert = styled(MuiAlert)(({ theme }) => ({
+//   width: "100%",
+//   "& .MuiAlert-icon": {
+//     marginRight: theme.spacing(1),
+//   },
+// }));
 
-function Alert(props) {
-  return <StyledAlert elevation={6} variant="filled" {...props} />;
-}
+// function Alert(props) {
+//   return <StyledAlert elevation={6} variant="filled" {...props} />;
+// }
 
-export { Transition2, Alert };
+// export { Transition2, Alert };
 
 export default function AddUnit() {
   const navigate = useNavigate();
@@ -55,15 +55,15 @@ export default function AddUnit() {
     has24HrSecurity: false,
   });
   const [price, setPrice] = useState("");
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  // const [openSnackbar, setOpenSnackbar] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
+  // const handleCloseSnackbar = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenSnackbar(false);
+  // };
 
   const uploadImages = async () => {
     const storage = getStorage();
@@ -99,11 +99,9 @@ export default function AddUnit() {
         Specifications: specifications,
         price: price,
       });
+      console.log("unit successfully added!");
 
-      setOpenSnackbar(true);
-      setTimeout(() => {
-        navigate("/admin");
-      }, 1000);
+      navigate("/admin");
     } catch (error) {
       console.error("Error creating unit: ", error);
     } finally {
@@ -246,14 +244,6 @@ export default function AddUnit() {
           )}
         </Form>
       </SubContainer>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}>
-        <Alert onClose={handleCloseSnackbar} severity="success">
-          Unit added successfully!
-        </Alert>
-      </Snackbar>
     </Container>
   );
 }

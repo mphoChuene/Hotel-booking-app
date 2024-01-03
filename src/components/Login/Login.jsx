@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import CircularProgress from "@mui/material/CircularProgress";
 import "./Login.css";
 
 const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -19,6 +21,7 @@ const Login = () => {
 
   const Signin = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const user = await signInWithEmailAndPassword(
         auth,
@@ -32,6 +35,8 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -51,12 +56,18 @@ const Login = () => {
               placeholder="password"
               onChange={handlePasswordChange}
             />
-            <button onClick={Signin}>Login</button>
+            <button onClick={Signin} disabled={loading}>
+              {loading ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                "Login"
+              )}
+            </button>
             <p className="message">
               Not registered? <a href="/register">Create an account</a>
             </p>
             <p className="message">
-              forgot password? <a href="/forgotpassword">reset you password</a>
+              Forgot password? <a href="/forgotpassword">Reset your password</a>
             </p>
           </form>
         </div>

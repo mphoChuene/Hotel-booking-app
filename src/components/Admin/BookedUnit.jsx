@@ -75,6 +75,8 @@ const BookedUnit = () => {
       <Heading>Booked Units</Heading>
       {bookedUnits.map((unit, index) => (
         <UnitCard key={index}>
+          <div>
+
           <UnitImage src={unit.roomDetails.Img} alt={unit.roomDetails.name} />
           <DetailsContainer>
             <Typography variant="h5">{unit.roomDetails.name} Unit</Typography>
@@ -122,6 +124,7 @@ const BookedUnit = () => {
               Stay Completed
             </Button>
           </DetailsContainer>
+          </div>
         </UnitCard>
       ))}
     </Container>

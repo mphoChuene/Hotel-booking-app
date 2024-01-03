@@ -23,6 +23,7 @@ import Navbar from "../Navbar/Navbar";
 import {
   Box,
   Button,
+  CircularProgress,
   InputAdornment,
   MenuItem,
   Modal,
@@ -147,6 +148,7 @@ const ViewRooms = () => {
   const [checkin, setCheckin] = useState(null);
   const [checkout, setCheckout] = useState(null);
   const [guest, setGuest] = useState("");
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -157,7 +159,6 @@ const ViewRooms = () => {
       try {
         const roomDocRef = doc(db, "bookings", unitId);
         const roomSnapshot = await getDoc(roomDocRef);
-        console.log(guest);
 
         if (roomSnapshot.exists()) {
           setRoomDetails(roomSnapshot.data());
@@ -166,14 +167,30 @@ const ViewRooms = () => {
         }
       } catch (error) {
         console.error("Error fetching room details:", error);
+      } finally {
+        setLoading(false); // Set loading to false once data is fetched
       }
     };
 
     fetchRoomDetails();
   }, [unitId]);
 
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh", // Full height of the viewport
+        }}>
+        <CircularProgress />
+      </div>
+    );
+  }
+
   if (!roomDetails) {
-    return <div>Loading...</div>;
+    return <div>No data available</div>;
   }
 
   // Function to handle Paystack payment
@@ -356,10 +373,19 @@ const ViewRooms = () => {
                 flexDirection: "row",
                 listStyleType: "none",
               }}>
-              <li style={{ marginRight: "30px" }}>8 guest</li>
-              <li style={{ marginRight: "30px" }}>4 bedrooms</li>
-              <li style={{ marginRight: "30px" }}>6 beds</li>
-              <li style={{ marginRight: "30px" }}>4 baths</li>
+              <li style={{ marginRight: "30px" }}>
+                {roomDetails.Specifications.bedrooms} guests{" "}
+              </li>
+              <li style={{ marginRight: "30px" }}>
+                {" "}
+                {roomDetails.Specifications.bedrooms} bedrooms
+              </li>
+              <li style={{ marginRight: "30px" }}>
+                {roomDetails.Specifications.bedrooms} beds
+              </li>
+              <li style={{ marginRight: "30px" }}>
+                {roomDetails.Specifications.bathrooms} baths
+              </li>
             </div>
             <Rating name="size-small" defaultValue={5} size="small" readOnly />
             <button

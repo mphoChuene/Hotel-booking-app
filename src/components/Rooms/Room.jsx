@@ -85,6 +85,7 @@ const Room = (unit) => {
   };
 
   const [rating, setRating] = useState(4);
+  // const roomDate = new Date(unit.Date.toDate());
 
   return (
     <Card
@@ -159,7 +160,8 @@ const Room = (unit) => {
               // sx={{ marginLeft: "10px" }}
             />
             <Text>beach and garden views</Text>
-            <Text>feb 11 -16</Text>
+            {/* <Text>{roomDate.getFullYear()}</Text> */}
+
             <Price style={{ textAlign: "left", marginTop: "8px" }}>
               R{unit.price} ZAR night
             </Price>

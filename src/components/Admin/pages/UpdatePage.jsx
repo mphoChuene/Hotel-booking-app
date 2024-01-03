@@ -3,7 +3,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useNavigate, useParams } from "react-router-dom";
-import "./addUnit.css";
+// import "./addUnit.css";
 
 const UpdatePage = () => {
   const { id } = useParams();

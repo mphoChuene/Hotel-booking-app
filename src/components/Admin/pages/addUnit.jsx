@@ -1,17 +1,52 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase-config";
-import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage"; // Import getStorage
+import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
-import "./AddUnit.css";
+import {
+  Container,
+  Heading,
+  SubContainer,
+  Form,
+  Input,
+  DateInput,
+  FileInput,
+  Dropdown,
+  Checkbox,
+  CheckboxLabel,
+  CheckboxInput,
+  SubmitButton,
+  PriceInput,
+} from "./AddUnit.styles";
+import { Typography, Button, Snackbar, CircularProgress } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import Grow from "@mui/material/Grow";
+import { styled } from "@mui/system";
 
-const AddUnit = () => {
+const Transition2 = React.forwardRef(function Transition2(props, ref) {
+  return <Grow ref={ref} {...props} />;
+});
+
+const StyledAlert = styled(MuiAlert)(({ theme }) => ({
+  width: "100%",
+  "& .MuiAlert-icon": {
+    marginRight: theme.spacing(1),
+  },
+}));
+
+function Alert(props) {
+  return <StyledAlert elevation={6} variant="filled" {...props} />;
+}
+
+export { Transition2, Alert };
+
+export default function AddUnit() {
   const navigate = useNavigate();
   const unitCollectionRef = collection(db, "bookings");
 
   const [name, setName] = useState("");
   const [newDate, setNewDate] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
   const [specifications, setSpecifications] = useState({
     bedrooms: "",
     bathrooms: "",
@@ -19,72 +54,96 @@ const AddUnit = () => {
     hasFreeParking: false,
     has24HrSecurity: false,
   });
-  const [price, setPrice] = useState(""); // Added state for price
+  const [price, setPrice] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Define the uploadImage function
-  const uploadImage = async (imageFile) => {
-    const storage = getStorage(); // Initialize Firebase Storage
-    const storageRef = ref(storage, `images/${imageFile.name}`);
-
-    try {
-      // Upload the image to Firebase Storage
-      await uploadBytes(storageRef, imageFile);
-
-      // Get the download URL for the uploaded image
-      const downloadURL = await getDownloadURL(storageRef);
-
-      return downloadURL; // Return the image URL
-    } catch (error) {
-      console.error("Error uploading image: ", error);
-      throw error; // Handle or rethrow the error
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
+    setOpenSnackbar(false);
+  };
+
+  const uploadImages = async () => {
+    const storage = getStorage();
+    const urls = [];
+
+    for (const imageFile of imageFiles) {
+      const storageRef = ref(storage, `images/${imageFile.name}`);
+
+      try {
+        await uploadBytes(storageRef, imageFile);
+        const downloadURL = await getDownloadURL(storageRef);
+        urls.push(downloadURL);
+      } catch (error) {
+        console.error("Error uploading image: ", error);
+        throw error;
+      }
+    }
+
+    return urls;
   };
 
   const createUnit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    // Upload the image to a storage service and get the image URL
-    const imageURL = await uploadImage(imageFile);
+    try {
+      const imageUrls = await uploadImages();
 
-    // Create a new unit with specifications and add it to Firestore
-    await addDoc(unitCollectionRef, {
-      name: name,
-      Img: imageURL,
-      Date: newDate,
-      Specifications: specifications,
-      price: price, // Include the price
-    });
+      await addDoc(unitCollectionRef, {
+        name: name,
+        Img: imageUrls,
+        Date: newDate,
+        Specifications: specifications,
+        price: price,
+      });
 
-    navigate("/admin");
+      setOpenSnackbar(true);
+      setTimeout(() => {
+        navigate("/admin");
+      }, 1000);
+    } catch (error) {
+      console.error("Error creating unit: ", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
-  };
+    const files = event.target.files;
+    const fileArray = [];
 
+    for (let i = 0; i < files.length; i++) {
+      fileArray.push(files[i]);
+    }
+
+    setImageFiles(fileArray);
+  };
   return (
-    <div className="main-container">
-      <h2 className="heading">Add unit</h2>
-      <div className="sub-container">
-        <form>
-          <input
+    <Container>
+      <Heading>Add unit</Heading>
+      <SubContainer>
+        <Form>
+          <Input
             type="text"
             placeholder="Unit Name"
             value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
+            onChange={(event) => setName(event.target.value)}
           />
-          <input
+          <DateInput
             type="date"
             value={newDate}
-            onChange={(event) => {
-              setNewDate(event.target.value);
-            }}
+            onChange={(event) => setNewDate(event.target.value)}
           />
-          <input type="file" accept="image/*" onChange={handleImageUpload} />
-          <div className="dropdown">
+          <FileInput
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            multiple
+          />
+          <Dropdown>
             <label>Number of Bedrooms:</label>
             <select
               value={specifications.bedrooms}
@@ -93,8 +152,7 @@ const AddUnit = () => {
                   ...specifications,
                   bedrooms: e.target.value,
                 })
-              }
-            >
+              }>
               <option value="">Select</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -102,8 +160,8 @@ const AddUnit = () => {
               <option value="4">4</option>
               <option value="5+">5+</option>
             </select>
-          </div>
-          <div className="dropdown">
+          </Dropdown>
+          <Dropdown>
             <label>Number of Bathrooms:</label>
             <select
               value={specifications.bathrooms}
@@ -112,8 +170,7 @@ const AddUnit = () => {
                   ...specifications,
                   bathrooms: e.target.value,
                 })
-              }
-            >
+              }>
               <option value="">Select</option>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -121,11 +178,11 @@ const AddUnit = () => {
               <option value="4">4</option>
               <option value="5+">5+</option>
             </select>
-          </div>
-          <div className="checkbox">
-            <label>
+          </Dropdown>
+          <Checkbox>
+            <CheckboxLabel>
               Gym:
-              <input
+              <CheckboxInput
                 type="checkbox"
                 checked={specifications.hasGym}
                 onChange={() =>
@@ -135,12 +192,12 @@ const AddUnit = () => {
                   })
                 }
               />
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
+            </CheckboxLabel>
+          </Checkbox>
+          <Checkbox>
+            <CheckboxLabel>
               Free Parking:
-              <input
+              <CheckboxInput
                 type="checkbox"
                 checked={specifications.hasFreeParking}
                 onChange={() =>
@@ -150,12 +207,12 @@ const AddUnit = () => {
                   })
                 }
               />
-            </label>
-          </div>
-          <div className="checkbox">
-            <label>
+            </CheckboxLabel>
+          </Checkbox>
+          <Checkbox>
+            <CheckboxLabel>
               24-Hour Security:
-              <input
+              <CheckboxInput
                 type="checkbox"
                 checked={specifications.has24HrSecurity}
                 onChange={() =>
@@ -165,21 +222,38 @@ const AddUnit = () => {
                   })
                 }
               />
-            </label>
-          </div>
-          <input
-            type="text"
-            placeholder="Price" // Input for price
+            </CheckboxLabel>
+          </Checkbox>
+          <PriceInput
+            type="number"
+            placeholder="Price"
             value={price}
-            onChange={(event) => {
-              setPrice(event.target.value);
-            }}
+            onChange={(event) => setPrice(event.target.value)}
           />
-          <button onClick={createUnit}>Add unit</button>
-        </form>
-      </div>
-    </div>
+          {loading ? (
+            <CircularProgress
+              size={24}
+              color="inherit"
+              sx={{ width: "100%", height: "8vh", alignSelf: "center" }}
+            />
+          ) : (
+            <SubmitButton
+              variant="contained"
+              onClick={createUnit}
+              disabled={loading}>
+              Add unit
+            </SubmitButton>
+          )}
+        </Form>
+      </SubContainer>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity="success">
+          Unit added successfully!
+        </Alert>
+      </Snackbar>
+    </Container>
   );
-};
-
-export default AddUnit;
+}

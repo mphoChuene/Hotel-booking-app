@@ -4,9 +4,10 @@ import styles from "./AddedRooms.module.css";
 const AddedRooms = ({ units }) => {
   return (
     <div className={styles.addedRoomsContainer}>
-      {units.map((unit) => (
+      {units.map((unit, index) => (
         <div className={styles.addedRoom} key={unit.id}>
-          <img src={unit.Img} alt="room unit" />
+          {/* Use the image from the first unit at index 0 */}
+          <img src={index === 0 ? unit.Images : ""} alt="room unit" />
           <div className={styles.roomDetails}>
             <p className={styles.date}>
               <i className="fa-solid fa-moon"></i> {unit.Date}

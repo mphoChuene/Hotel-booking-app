@@ -89,7 +89,7 @@ const Room = (unit) => {
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 320,
         alignItems: "center",
         margin: 10,
         justifyContent: "center",
@@ -99,7 +99,42 @@ const Room = (unit) => {
       }}>
       <Container>
         {loading ? (
-          <Skeleton variant="rectangular" width={345} height={200} />
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <Skeleton
+              variant="rectangular"
+              width={345}
+              height={200}
+              sx={{ marginTop: 1 }}
+              animation="wave"
+            />
+            <Skeleton
+              variant="rectangular"
+              width={245}
+              height={20}
+              sx={{ marginTop: 2, marginLeft: 1 }}
+              animation="pulse"
+            />
+            <Skeleton
+              variant="rectangular"
+              width={245}
+              height={20}
+              sx={{ marginTop: 1, marginLeft: 1 }}
+            />
+
+            <Skeleton
+              variant="rectangular"
+              width={330}
+              height={40}
+              sx={{
+                marginTop: 1,
+                marginLeft: 1,
+                // alignSelf: "center",
+                // justifySelf: "center",
+                borderRadius: "5px",
+                marginBottom: "8px",
+              }}
+            />
+          </div>
         ) : null}
 
         <Wrapper>

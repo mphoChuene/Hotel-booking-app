@@ -4,6 +4,7 @@ import { db } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
+import Carousel from "react-material-ui-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -107,10 +108,11 @@ const currencies = [
     label: "Nine",
   },
 ];
-
 const CarouselContainer = styled.div`
-  width: 70%;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* Update to column or row based on your design */
+  align-items: center;
+  margin-top: 20px;
 `;
 
 const Image = styled.div`
@@ -118,13 +120,16 @@ const Image = styled.div`
 
   img {
     width: 100%;
+    max-height: 500px;
     height: auto;
+    margin-bottom: 20px;
   }
 `;
 
 const ThumbnailContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: row;
   margin-top: 10px;
 `;
 
@@ -229,15 +234,63 @@ const ViewRooms = () => {
   };
 
   const carouselSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    customPaging: (i) => (
-      <Thumbnail key={i} src={roomDetails.Img[i]} alt={`Thumbnail ${i}`} />
-    ),
+    animation: "slide",
+    indicators: true,
+    timeout: 500, // Adjust timeout as needed
   };
+  const StyledCarousel = styled(Carousel)`
+    width: 100%;
+    max-width: 800px; /* Adjust the max-width as needed */
+    margin: 0 auto;
+    overflow: hidden;
+
+    .slick-prev,
+    .slick-next {
+      font-size: 24px;
+      color: white;
+      background-color: #007bff;
+      border-radius: 50%;
+      width: 10px;
+      padding: 10px;
+      z-index: 1;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+
+    .slick-prev {
+      left: 10px;
+    }
+
+    .slick-next {
+      right: 10px;
+    }
+
+    .slick-dots {
+      bottom: 10px;
+
+      li {
+        button {
+          font-size: 12px;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin: 0 5px;
+          background-color: #007bff;
+          color: transparent;
+          transition: background-color 0.3s ease;
+
+          &:hover,
+          &.slick-active {
+            background-color: #0056b3;
+          }
+        }
+      }
+    }
+  `;
+
   // console.log(roomDetails.Img[0]);
 
   return (
@@ -253,9 +306,9 @@ const ViewRooms = () => {
           justifyContent: "center",
           width: "100%",
         }}>
-        <CarouselContainer>
+        <CarouselContainer style={{ display: "flex", flexDirection: "column" }}>
           {roomDetails.Img && roomDetails.Img.length > 0 ? (
-            <Slider {...carouselSettings}>
+            <StyledCarousel {...carouselSettings}>
               {roomDetails.Img.map((image, index) => (
                 <Image key={index}>
                   <img
@@ -269,7 +322,7 @@ const ViewRooms = () => {
                   />
                 </Image>
               ))}
-            </Slider>
+            </StyledCarousel>
           ) : (
             <div>No images available</div>
           )}

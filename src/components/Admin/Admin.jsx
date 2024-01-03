@@ -15,6 +15,7 @@ import {
   faMoneyBillWave,
 } from "@fortawesome/free-solid-svg-icons";
 import BookedUnit from "./BookedUnit";
+import Navbar from "../Navbar/Navbar";
 
 const iconSize = {
   fontSize: "25px",
@@ -56,13 +57,8 @@ const Admin = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.search_bar}>
-        <h2>Whiteman Lodge</h2>
-
-        <h2 className={styles.admin_icon}>
-          <FontAwesomeIcon icon={faUser} />
-          Admin
-        </h2>
+      <div style={{ backgroundColor: "whitesmoke" }}>
+        <Navbar />
       </div>
       <div className={styles.options}>
         <button style={{ marginRight: 10 }}>
@@ -75,9 +71,7 @@ const Admin = () => {
           Add Room
         </button>
       </div>
-      <div className={styles.bar}>
-        <h2>Hotel Suites</h2>
-      </div>
+
       <div className={styles.unit_container}>
         {units.map((unit) => {
           return (
@@ -126,14 +120,12 @@ const Admin = () => {
                 </p>
                 <button
                   className={styles.btn}
-                  onClick={() => updateUnit(unit.id)}
-                >
+                  onClick={() => updateUnit(unit.id)}>
                   Update
                 </button>
                 <button
                   className={styles.btn}
-                  onClick={() => deleteUnit(unit.id)}
-                >
+                  onClick={() => deleteUnit(unit.id)}>
                   Delete
                 </button>
               </div>
@@ -142,8 +134,7 @@ const Admin = () => {
         })}
       </div>
 
-      <BookedUnit/>
-
+      <BookedUnit />
     </div>
   );
 };

@@ -42,6 +42,7 @@ import {
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -396,24 +397,26 @@ const ViewRooms = () => {
                   alignItems: "center",
                 }}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <SubContainer
-                    style={{ display: "flex", flexDirection: "column" }}>
-                    <label style={{ marginLeft: 10 }}>check-in</label>
-                    <DatePicker
-                      value={checkin}
-                      onChange={(newValue) => setCheckin(newValue)}
-                      sx={{ width: "10vw", margin: "10px", padding: 0 }}
-                    />
-                  </SubContainer>
-                  <SubContainer
-                    style={{ display: "flex", flexDirection: "column" }}>
-                    <label style={{ marginLeft: 10 }}>check-out</label>
-                    <DatePicker
-                      value={checkout}
-                      onChange={(newValue) => setCheckout(newValue)}
-                      sx={{ width: "10vw", margin: "10px", padding: 0 }}
-                    />
-                  </SubContainer>
+                  <DemoContainer components={["DatePicker"]}>
+                    <SubContainer
+                      style={{ display: "flex", flexDirection: "column" }}>
+                      <label style={{ marginLeft: 10 }}>check-in</label>
+                      <DatePicker
+                        value={checkin}
+                        onChange={(newValue) => setCheckin(newValue)}
+                        sx={{ width: "10vw", margin: "10px", padding: 0 }}
+                      />
+                    </SubContainer>
+                    <SubContainer
+                      style={{ display: "flex", flexDirection: "column" }}>
+                      <label style={{ marginLeft: 10 }}>check-out</label>
+                      <DatePicker
+                        value={checkout}
+                        onChange={(newValue) => setCheckout(newValue)}
+                        sx={{ width: "10vw", margin: "10px", padding: 0 }}
+                      />
+                    </SubContainer>
+                  </DemoContainer>
                 </LocalizationProvider>
               </div>
               <Text>Guests</Text>

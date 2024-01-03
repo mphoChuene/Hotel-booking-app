@@ -35,32 +35,31 @@ const Rooms = () => {
 
   return (
     <div>
-      <div>
+      <div
+        style={{
+          // backgroundColor: "blue",
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          letterSpacing: "5px",
+          marginTop: "30px",
+        }}>
         <h1>Our Room Categories</h1>
         <p>Explore a range of rooms from basic to luxury.</p>
       </div>
       <div
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-        {loading ? (
-          // Skeleton while loading
-          <Skeleton
-            variant="rectangular"
-            width={300}
-            height={200}
-            animation="pulse"
+        {units.map((unit) => (
+          <Room
+            unit={unit}
+            key={unit.id}
+            Img={unit.Img}
+            name={unit.name}
+            price={unit.price}
+            unitId={unit.id}
           />
-        ) : (
-          units.map((unit) => (
-            <Room
-              unit={unit}
-              key={unit.id}
-              Img={unit.Img}
-              name={unit.name}
-              price={unit.price}
-              unitId={unit.id}
-            />
-          ))
-        )}
+        ))}
       </div>
     </div>
   );

@@ -22,6 +22,7 @@
 
 form label {
   font-size: 0.8rem;
+  text-align: center;
   /* padding-top: 2px; */
 }
 
@@ -30,6 +31,7 @@ form label {
 .until {
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .from,
@@ -51,11 +53,13 @@ form input:focus {
 form .text_input {
   width: 300px;
   font-size: 1rem;
+  text-align: center;
 }
 
 .search_btn {
   display: flex;
   align-items: center;
+  text-align: center;
 }
 
 .search_btn button {

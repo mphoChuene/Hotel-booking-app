@@ -17,30 +17,13 @@ const Hero = () => {
 
   return (
     <div className={styles.hero}>
-      <div className={styles.form}>
-        <div className={styles.text}>
-          <label className={styles.label}>Check-In Date:</label>
-          <DatePicker
-            selected={checkInDate}
-            onChange={handleCheckInChange}
-            selectsStart
-            startDate={checkInDate}
-            endDate={checkOutDate}
-            className={styles.datePicker}
-          />
+      <div className={styles.form} style={{ justifyContent: "center" }}>
+        <div className={styles.text} style={{ letterSpacing: "5px",fontSize:'25px'}}>
+          <label className={styles.label} style={{ textAlign: "center" }}>
+            Welcome to Paradise Lodge
+          </label>
         </div>
-        <div className={styles.until}>
-          <label className={styles.label}>Check-Out Date:</label>
-          <DatePicker
-            selected={checkOutDate}
-            onChange={handleCheckOutChange}
-            selectsEnd
-            startDate={checkInDate}
-            endDate={checkOutDate}
-            minDate={checkInDate}
-            className={styles.datePicker}
-          />
-        </div>
+        <div className={styles.until}></div>
       </div>
     </div>
   );

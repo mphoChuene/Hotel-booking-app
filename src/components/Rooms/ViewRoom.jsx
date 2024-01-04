@@ -250,12 +250,29 @@ const ViewRooms = () => {
       console.error("Error adding reservation to Firestore:", error);
     }
   };
-
   const carouselSettings = {
     animation: "slide",
     indicators: true,
-    timeout: 500, // Adjust timeout as needed
+    timeout: 600,
+    autoplay: true,
+    interval: 2000,
+    navButtonsAlwaysInvisible: false,
+    clickToChange: true,
+    centerSlidePercentage: 80,
+    responsive: {
+      0: {
+        centerSlidePercentage: 100,
+      },
+      600: {
+        centerSlidePercentage: 80,
+      },
+      1024: {
+        centerSlidePercentage: 70,
+      },
+    },
+    containerClass: "custom-carousel-container",
   };
+
   const StyledCarousel = styled(Carousel)`
     width: 100%;
     max-width: 800px; /* Adjust the max-width as needed */
@@ -267,7 +284,7 @@ const ViewRooms = () => {
       font-size: 24px;
       color: white;
       background-color: #007bff;
-      border-radius: 50%;
+      // border-radius: 50%;
       width: 10px;
       padding: 10px;
       z-index: 1;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { db, doc } from "../../firebase-config";
 import { collection, onSnapshot, deleteDoc } from "firebase/firestore";
-import styles from "./Admin.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -16,12 +16,120 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import BookedUnit from "./BookedUnit";
 import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
 
-const iconSize = {
-  fontSize: "25px",
-  color: "#ffffff",
-  margin: "0 15px",
-};
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: whitesmoke;
+`;
+
+const OptionsContainer = styled.div`
+  display: flex;
+  margin: 20px 0;
+`;
+
+const Button = styled.button`
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+
+  &:last-child {
+    background-color: #007bff;
+  }
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  font-size: 25px;
+  margin-right: 10px;
+`;
+
+const UnitContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 80%;
+`;
+
+const UnitCard = styled.div`
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .availability {
+    padding: 15px;
+
+    .sub_text {
+      display: flex;
+      align-items: center;
+      color: #777;
+      font-size: 14px;
+
+      svg {
+        margin-right: 5px;
+        color: #4caf50;
+      }
+    }
+
+    .specifications {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+`;
+
+const Spinner = styled.div`
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  align-self: center;
+  margin-top: 50px;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`;
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -35,11 +143,8 @@ const Admin = () => {
     await deleteDoc(unitDoc);
   };
 
-  const addRoom = () => {
-    navigate("/addunit");
-  };
-
   const [units, setUnits] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const unitCollectionRef = collection(db, "bookings");
 
@@ -50,38 +155,39 @@ const Admin = () => {
         id: doc.id,
       }));
       setUnits(data);
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
   return (
-    <div className={styles.container}>
-      <div style={{ backgroundColor: "whitesmoke" }}>
-        <Navbar />
-      </div>
-      <div className={styles.options}>
-        <button style={{ marginRight: 10 }}>
-          <FontAwesomeIcon icon={faBed} style={{ ...iconSize }} />
+    <Container>
+      <Navbar />
+
+      <OptionsContainer>
+        <Button>
+          <Icon icon={faBed} />
           All rooms
-        </button>
-
-        <button onClick={addRoom}>
-          <FontAwesomeIcon icon={faCirclePlus} style={{ ...iconSize }} />
+        </Button>
+        <Button onClick={() => navigate("/addunit")}>
+          <Icon icon={faCirclePlus} />
           Add Room
-        </button>
-      </div>
+        </Button>
+      </OptionsContainer>
 
-      <div className={styles.unit_container}>
-        {units.map((unit) => {
-          return (
-            <div className={styles.unit} key={unit.id}>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <UnitContainer>
+          {units.map((unit) => (
+            <UnitCard key={unit.id}>
               <img src={unit.Img} alt="room unit" />
-              <div className={styles.availability}>
-                <span className={styles.sub_text}>
+              <div className="availability">
+                <span className="sub_text">
                   <FontAwesomeIcon icon={faCirclePlus} /> {unit.Date}
                 </span>
-                <p className={styles.specifications}>
+                <p className="specifications">
                   <span>
                     <FontAwesomeIcon icon={faBed} />{" "}
                     {unit.Specifications.bedrooms} Bedrooms
@@ -119,23 +225,26 @@ const Admin = () => {
                   </span>
                 </p>
                 <button
-                  className={styles.btn}
+                  className="btn"
+                  style={{ margin: "0px 10px" }}
                   onClick={() => updateUnit(unit.id)}>
                   Update
                 </button>
                 <button
-                  className={styles.btn}
+                  className="btn"
+                  style={{ margin: "0px 10px", backgroundColor: "red" }}
                   onClick={() => deleteUnit(unit.id)}>
                   Delete
                 </button>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            </UnitCard>
+          ))}
+        </UnitContainer>
+      )}
 
       <BookedUnit />
-    </div>
+      <Footer />
+    </Container>
   );
 };
 

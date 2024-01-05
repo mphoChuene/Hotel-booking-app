@@ -115,6 +115,8 @@ const CarouselContainer = styled.div`
   flex-direction: column; /* Update to column or row based on your design */
   align-items: center;
   margin-top: 20px;
+  // background-color: blue;
+  width: 100dvh;
 `;
 
 const Image = styled.div`
@@ -306,23 +308,23 @@ const ViewRooms = () => {
     .slick-dots {
       bottom: 10px;
 
-      li {
-        button {
-          font-size: 12px;
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-          margin: 0 5px;
-          background-color: #007bff;
-          color: transparent;
-          transition: background-color 0.3s ease;
+      // li {
+      //   button {
+      //     font-size: 12px;
+      //     width: 12px;
+      //     height: 12px;
+      //     border-radius: 50%;
+      //     margin: 0 5px;
+      //     background-color: #007bff;
+      //     color: transparent;
+      //     transition: background-color 0.3s ease;
 
-          &:hover,
-          &.slick-active {
-            background-color: #0056b3;
-          }
-        }
-      }
+      //     &:hover,
+      //     &.slick-active {
+      //       background-color: #0056b3;
+      //     }
+      //   }
+      // }
     }
   `;
 
@@ -416,6 +418,7 @@ const ViewRooms = () => {
                 alignItems: "center",
                 display: "flex",
                 marginTop: "0px",
+                border: "none",
               }}
               onClick={handlePaystackPayment}>
               Reserve
@@ -515,13 +518,16 @@ const ViewRooms = () => {
             style={{
               backgroundColor: "whitesmoke",
               color: "#000",
-              width: "12%",
+              width: "8%",
               height: "5dvh",
               justifyContent: "center",
+              textAlign: "center",
+              alignItems: "center",
               display: "flex",
               marginTop: "0px",
+              border: "none",
             }}>
-            <Text style={{ textAlign: "center" }}> show more </Text>
+            show more
           </button>
           <Modal
             open={open}

@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 
 const Image = styled(CardMedia)`
   width: 100%;
-  // height: auto;
+  height: auto;
   max-height: 300px;
   object-fit: contain;
   border-radius: 0px;
